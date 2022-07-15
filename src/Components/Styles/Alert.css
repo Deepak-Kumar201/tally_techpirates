@@ -1,0 +1,126 @@
+@import url("https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@1,800&display=swap");
+
+* {
+    margin: 0px;
+    padding: 0px;
+    font-family: "Fira Sans", sans-serif;
+}
+
+.alertBox {
+    width: 400px;
+    border: 1px solid black;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #282828;
+    color: #000;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-bottom: 10px;
+    /* position: absolute;
+    top:150px;
+    left: 50%; */
+    /* margin-left: -200px; */
+    z-index: 2;
+}
+
+.alertBody {
+    background-color: white;
+    width: 80%;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+    border: none;
+}
+
+.alertBody:focus {
+    outline: none;
+}
+
+.alertOk {
+    background-color: dodgerblue;
+    color: white;
+    width: 50%;
+    height: 40px;
+    border-radius: 5px;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
+    margin: 10px;
+}
+
+.alertOk:hover {
+    background-color: rgb(0, 111, 221);
+}
+
+.fillAlert {
+    color: white;
+    width: 30%;
+    height: 40px;
+    border-radius: 5px;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
+    margin: 10px;
+}
+
+
+
+.cover {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: 1;
+}
+
+.fillAlert{
+	background-color: #1ab552;
+	color: white;
+	border: none;
+}
+
+.fillAlert:hover{
+	background-color: rgb(28,202,90);
+}
+
+.cancelAlert{
+	border:2px solid #1ab552;
+    line-height: 36px;
+	color: white;
+	background-color: transparent;
+}
+
+.cancelAlert:hover{
+	background-color: #1ab552;
+	border:2px solid #1ab552;
+}
+
+
+@media screen and (max-width: 450px) {
+    .alertBox {
+        width: 300px;
+    }
+    .alertBody {
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .alertBox {
+        width: 250px;
+    }
+    .alertBody {
+        width: 90%;
+    }
+}
+
+.topFix{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+}

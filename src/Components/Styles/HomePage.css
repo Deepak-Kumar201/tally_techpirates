@@ -1,0 +1,257 @@
+@import url("https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@1,800&display=swap");
+
+*{
+    padding: 0px;
+    font-family: "Fira Sans", sans-serif;
+    margin: 0px;
+    scroll-behavior: smooth;
+}
+#homeUpper{
+    width: 100vw;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    color: white;
+    font-size: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    text-shadow: 2px 2px 5px black;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    transition: all 2s;
+    box-shadow: 10px 10px 10px white;
+}
+
+
+@media screen and (max-width : 750px) {
+    #homeUpper{
+        font-size: 30px;
+    }
+}
+
+
+@media screen and (max-width : 550px) {
+    #homeUpper{
+        font-size: 20px;
+    }
+}
+
+
+@media screen and (max-width : 400px) {
+    #homeUpper{
+        font-size: 15px;
+    }
+}
+
+#homeLower{
+    width: 100vw;
+    height: 200vh;
+    background-color: aquamarine;
+    position: absolute;
+    z-index: -1;
+}
+
+#homeWel{
+    position:absolute;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+}
+
+/*Login Page */
+.signin-full
+{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.signin{
+    width: 30%;
+    border-radius: 20px;
+    margin: auto;
+    background-color: #243238;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 15px 0;
+}
+.admin-signin{
+    position: relative;
+}
+.signin-option-btn
+{
+    position: absolute;
+    right: 5px;
+    margin: 10px;
+    z-index: 10;
+}
+
+.btn-option{
+    font-size: 14px;
+    margin: 0;
+    padding: 8px 10px;
+    border: none;
+}
+.btn-1
+{
+    background-color: #6fcd07;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+    padding-left: 10px;
+    color: white;
+}
+.btn-2
+{
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    padding-right: 10px;
+}
+
+.signin-admin-main
+{
+    padding-top: 60px;
+    padding-bottom: 20px;
+}
+
+/* Attendant Form */
+.form-head-attendant
+{
+    color: white;
+    padding-bottom: 15px;
+}
+.signin-attendant-form
+{
+    display:flex;
+    flex-direction: column;
+}
+.attendant-enter-btn, .admin-signin-btn
+{
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 0px;
+    padding: 8px 20px;
+    border-radius: 20px;
+    border: none;
+    transition: all 0.5s;
+    background-color: #6fcd07;
+    color: white;
+    max-width: fit-content;
+    font-size: 20px;
+}
+.attendant-enter-btn:hover
+{
+    box-shadow: 0px 0px 10px #d8ffab;
+}
+
+/*Admin Form */
+
+.signin-msg
+{
+    color: white;
+}
+.signin-admin-form
+{
+    display: flex;
+    flex-direction: column;
+}
+.signin-label
+{
+    color: #6fcd07;
+    font-size: 17px;
+    align-self: flex-start;
+    padding-bottom: 6px;
+}
+.signin-inp
+{
+    border: none;
+    border-bottom: 1px solid white;
+    background-color: transparent;
+    width: 100%;
+    align-self: center;
+    font-size: 13px;
+    color: white;
+    font-size: 15px;
+    padding: 5px;
+}
+.signin-inp:focus
+{
+    outline: none;
+}
+.admin-password, .admin-email, .form-id
+{
+    display: flex;
+    flex-direction: column;
+    padding: 5px 40px;
+}
+
+.admin-signin-btn:hover
+{
+    box-shadow: 0px 0px 10px #d8ffab;
+}
+.signin-div
+{
+    margin-top: 10px;
+    padding: 5px;
+    border: none;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-evenly;
+}
+.signin-option {
+    background-color: none;
+    border-radius: 50%;
+    border: none;
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+    padding: 3px;
+}
+.signin-option:hover {
+    box-shadow: 0px 0px 5px #d8ffab;
+}
+.signin-twitter
+{
+    color: #1DA1F2;
+}
+.forgot
+{
+    text-decoration: none;
+    font-size: 13px;
+    color: white;
+    align-self: flex-end;
+    display: block;
+    width: 90%;
+    text-align: right;
+    padding: 5px 40px;
+}
+.forgot:hover
+{
+    color: #6fcd07;
+}
+.signupoption{
+    font-size: 17px;
+    margin-bottom: 15px;
+    color: white;
+}
+.signupoption a {
+    color: #6fcd07;
+    text-decoration: none;
+}
+
+
+.main-head
+{
+    text-align: center;
+
+}
+
+
+/* Login Page */
