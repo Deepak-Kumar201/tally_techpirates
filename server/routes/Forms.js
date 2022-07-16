@@ -168,15 +168,53 @@ router.post("/changeactive", resolveJWT, async(req, resp)=>{
 	}
 })
 
-router.post("/getanser", async (req, resp)=>{
-	var answers = await Formans.findOne({fId : req.body.fId});
-	var id = answers.id;
-	if(!answers){
-		return {"error":"invalid form id"};
+router.post("/getanswer", resolveJWT,async (req, resp)=>{
+	try {
+		var form = await Forms.findOne({_id : req.body.fId, user : req.body.id});
+		if(!form){
+			resp.status(401).send({error:"Cann't get form"});
+			return;
+		}
+		var answers = await Formans.findOne({fId : req.body.fId});
+		
+		if(!answers){
+			return {"error":"invalid form id"};
+		}
+		resp.send({data:answers});
+	} catch (error) {
+		resp.status(500).send({ "error": "Some server error occured try after some time" });
 	}
-	console.log(answers);
-	// answers = JSON.parse(answers.answer);
-	resp.send({answers});
+});
+
+router.post("/getresponse", resolveJWT,async (req, resp)=>{
+	try {
+		var form = await Forms.findOne({_id : req.body.fId, user : req.body.id});
+		if(!form){
+			resp.status(401).send({error:"Cann't get form"});
+			return;
+		}
+		var answers = await Formresp.findOne({fId : req.body.fId});
+		
+		if(!answers){
+			return {"error":"invalid form id"};
+		}
+		resp.send({data:answers});
+	} catch (error) {
+		resp.status(500).send({ "error": "Some server error occured try after some time" });
+	}
+});
+
+router.post("/getauthform", resolveJWT,async (req, resp)=>{
+	try {
+		var form = await Forms.findOne({_id : req.body.fId, user : req.body.id});
+		if(!form){
+			resp.status(401).send({error:"Cann't get form"});
+			return;
+		}
+		resp.send({data:form});
+	} catch (error) {
+		resp.status(500).send({ "error": "Some server error occured try after some time" });
+	}
 });
 
 router.post('/updateRecieve', resolveJWT,async (req, resp)=>{

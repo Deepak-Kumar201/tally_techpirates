@@ -19,6 +19,7 @@
 }
 
 
+
 body{
 	overflow-x:hidden;
 }
@@ -28,3 +29,9 @@ body{
   }
 
 
+.form{
+	height: 100vh;
+}
+input[type=number]::-webkit-inner-spin-button{
+    display: none;
+}

@@ -46,6 +46,12 @@ const FillState = (props) => {
         data = resp.data;
         settitle(resp.title);
         setdesc(resp.description);
+        var x = window.prompt("Enter your Name");
+        while(x.trim().length == 0){
+            x = window.prompt("Enter your Name");
+        }
+
+        setname(x);
         
         const que = JSON.parse(JSON.parse(data));
         var arr = [];
