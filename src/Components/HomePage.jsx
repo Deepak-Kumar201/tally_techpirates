@@ -24,6 +24,7 @@ export default function HomePage(props) {
             email : email,
             password : password
         }
+        context.startLoader();
         console.log(data);
         var uri = "http://localhost:5000/api/user/signin";
         var resp = await fetch(uri, {
@@ -34,6 +35,7 @@ export default function HomePage(props) {
             body: JSON.stringify(data),
             });
         resp = await resp.json();
+        context.stopLoader();
         if(resp.error){
             context.showAlert(resp.error);
             return;

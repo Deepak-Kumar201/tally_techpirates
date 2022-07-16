@@ -13,7 +13,7 @@ app.use(cookieParser());
 
 //hj4h5432j5h$$Fh5i348u98**HU(*YGY$G#JH#)
 
-var dburi = "mongodb+srv://tally400:tally400@cluster0.xmo2p.mongodb.net/flipkart?retryWrites=true&w=majority";
+var dburi = "mongodb+srv://tally400:tally400@cluster0.xmo2p.mongodb.net/tally400?retryWrites=true&w=majority";
 mongoose.connect(dburi, (err)=>{
     if(err) console.log(err);
     else console.log("Database connected");
@@ -26,6 +26,7 @@ app.get('/', function (req, res) {
     res.send("<H1>Hello I am server</H1>");
 });
 app.use("/api/user", require("./routes/User"));
+app.use("/api/forms", require("./routes/Forms"));
 
 app.listen(PORT, () => {
     console.log("Listning to port 5000");

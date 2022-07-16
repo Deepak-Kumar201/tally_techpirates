@@ -13,7 +13,7 @@ const FormrespModel = new mongoose.Schema({
                 marks : {
                     type : {
                         sum : Number,
-                        points : mongoose.Types.Array
+                        points : String
                     }
                 }
             }
@@ -22,4 +22,4 @@ const FormrespModel = new mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model("forms", FormrespModel);
+module.exports = mongoose.model("formsresp", FormrespModel);

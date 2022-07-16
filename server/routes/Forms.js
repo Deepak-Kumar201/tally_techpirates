@@ -9,7 +9,6 @@ const router = express.Router();
 
 router.post('/create', resolveJWT, async (req, resp) => {
 	try {
-
 		const data = {
 			title : req.body.title,
 			description : req.body.description,
@@ -39,7 +38,7 @@ router.post('/create', resolveJWT, async (req, resp) => {
         })
 
         var formans = new Formans({
-            fId : newForm.data,
+            fId : newForm.id,
             answer : req.body.answer
         })
 
@@ -53,7 +52,8 @@ router.post('/create', resolveJWT, async (req, resp) => {
 
 		resp.send({ "fId": newForm.id });
 
-	} catch {
+	} catch (error){
+		console.log(error);
 		resp.status(500).send({ "error": "Some server error occured try after some time" });
 	}
 })

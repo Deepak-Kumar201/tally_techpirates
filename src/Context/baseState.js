@@ -270,15 +270,16 @@ const BaseState = (props) => {
 
         data = {
             title: title,
-            header: description,
+            description: description,
             data: form,
             answer : ans,
-            time : time
+            time : time,
+            token : localStorage.getItem('token')
         };
         console.log(data);
         // return;
         
-        const url = "";
+        const url = "http://localhost:5000/api/forms/create";
         startLoader();
 
         var resp = await fetch(url, {
@@ -290,16 +291,26 @@ const BaseState = (props) => {
         });
 
         resp = await resp.json();
+        console.log(resp);
+        stopLoader();
+        if(resp.error){
+            showAlert(resp.error);
+            return;
+        }
+
         showAlert(
             <>
                 <div>Form has been successfully save!</div>
-                <div> Form ID is {resp.formId}</div>
+                <div> Form ID is {resp.fId}</div>
             </>
         );
         setNewForm([]);
-        stopLoader();
-
+        setDecreasing(false);
+        setTimeBound(false);
+        setalwaysAccpet(false);
+        
         setAlertRed("/");
+        return {success:"Form created"};
     };
 
     return (

@@ -29,8 +29,10 @@ export default function Creator() {
 			return;
 		}
 		console.log("object");
-		console.log(await context.save());
-		
+		var res = await context.save();
+		if(res.error) {
+			context.showAlert(res.error);
+		}
 	}
 
 	if (context.user === null) {

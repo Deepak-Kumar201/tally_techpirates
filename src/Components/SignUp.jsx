@@ -19,10 +19,10 @@ export default function SignUp() {
         {
             context.showAlert("Enter Valid details");
             return;
-            // context.stopLoader();
         }
         else
-        {
+        {   
+            context.startLoader();
             let JsonObj = {
                 "name" : Name,
                 "email" : Email,
@@ -34,8 +34,9 @@ export default function SignUp() {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(JsonObj),
-                });
+            });
             resp = await resp.json();
+            context.stopLoader();
             if(resp.error){
                 context.showAlert(resp.error);
                 return;
