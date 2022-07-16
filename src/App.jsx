@@ -54,8 +54,8 @@ function App() {
 			{/* <HomePage /> */}
 			{/* <Card /> */}
 			{/* <YourForms /> */}
-			<Form />
-			<ScoreCard />
+			{/* <Form /> */}
+			{/* <ScoreCard /> */}
 			{/* <ShowForm /> */}
 			{/* <QuesStatic /> */}
 		</Router>

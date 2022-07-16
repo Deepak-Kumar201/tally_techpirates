@@ -56,7 +56,15 @@
 #homeWel{
     position:absolute;
 }
-
+#homeWel h1{
+    font-family: 'Libre Baskerville', serif;
+    font-weight: bolder;
+}
+#homeWel h4{
+    font-family :'Roboto Slab',serif;
+    font-weight: bolder;
+    color: #6fcd07;
+}
 ::-webkit-scrollbar {
     width: 0px;
 }
@@ -198,31 +206,54 @@
 {
     box-shadow: 0px 0px 10px #d8ffab;
 }
+.admin-signin-btn
+{
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 0px;
+    padding: 8px 20px;
+    border-radius: 20px;
+    border: none;
+    transition: all 0.5s;
+    background-color: #6fcd07;
+    color: white;
+    width: 50%;
+    font-size: 20px;
+}
 .signin-div
 {
+    margin: 0 auto;
     margin-top: 10px;
-    padding: 5px;
-    border: none;
-    border-radius: 50%;
     margin-bottom: 10px;
-    display: flex;
-    justify-content: space-evenly;
+    /* border: none;
+    border-radius: 50%; */
+    /* width: 300px; */
 }
 .signin-option {
-    background-color: none;
+    /* background-color: none;
     border-radius: 50%;
     border: none;
     width: 30px;
     height: 30px;
     font-size: 20px;
-    padding: 3px;
+    padding: 3px; */
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 0px;
+    padding: 8px 20px;
+    border-radius: 20px;
+    border: none;
+    transition: all 0.5s;
+    background-color: white;
+    color: #6fcd07;
+    font-size: 20px;
 }
+
 .signin-option:hover {
     box-shadow: 0px 0px 5px #d8ffab;
 }
-.signin-twitter
-{
-    color: #1DA1F2;
+.signin-option img{
+    height: 23px;
 }
 .forgot
 {
