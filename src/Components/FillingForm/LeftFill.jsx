@@ -55,7 +55,7 @@ export default function LeftFill() {
                         type="checkbox"
                         id={"option" + ind}
                         name={que.id}
-                        defaultChecked={context.ans[context.curQue] == null?false:context.ans[context.curQue][ind]}
+                        defaultChecked={context.ans[context.curQue]?context.ans[context.curQue][ind]:false}
                         onChange = {()=>{updateCheckAns(que.id)}}
                     />
                     <label

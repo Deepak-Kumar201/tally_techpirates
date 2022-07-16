@@ -19,12 +19,14 @@
     color: white;
     font-family: 'Roboto Slab', serif;
     align-items: center;
+    text-align: center;
+    cursor: pointer;
 }
 .showForm-Id-name{
     width: 100%;
     font-family: 'Roboto Slab', serif;
-    font-size: 30px;
-    margin-left: 20px;
+    font-size: 20px;
+    margin: 0px;
     color: #6fcd07;
 }
 .showForm-Id-link{
@@ -39,8 +41,44 @@
 .showForm-form-head{
     margin: 40px auto;
     text-align: center;
-    font-size: 40px;
+    font-size: 30px;
     font-family: 'PT Serif', serif;
     font-weight: bolder;
     text-decoration: underline;
+}
+
+.usershowform{
+    background-color: #243238;
+    padding: 20px 20px;
+    border-radius: 20px;
+}
+
+.textshowform{
+    display: flex;
+    color: #6fcd07;
+    font-size: 18px;
+}
+
+.textshowformque{
+    margin-left: 20px;
+    color: white;
+}
+
+.textshowform .textshowformopt{
+    font-size: 16px;
+    color: white;
+}
+
+.textshowformopt{
+    display: flex;
+    flex-direction: column;
+    color: white;
+    margin-left: 30px;
+}
+.textshowformopt div{
+    margin: 5px;
+}
+
+.textshowformopt div input{
+    margin: 0px 5px;
 }

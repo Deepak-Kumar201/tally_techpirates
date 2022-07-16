@@ -1,5 +1,5 @@
 import React , {useContext, useState} from 'react';
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import baseContext from '../Context/baseContext';
 import './Styles/Card.css';
 
@@ -7,6 +7,7 @@ import './Styles/Card.css';
 export default function Card({data}) {
     const context = useContext(baseContext);
     const [status, setstatus] = useState(data.accepting);
+    const history = useHistory();
     const shrink = (str)=>{
         if(str.length <= 12) return str;
         return str.substring(0, 12)+"...";
@@ -34,6 +35,10 @@ export default function Card({data}) {
         context.stopLoader();
     }
     
+    const openCard = ()=>{
+        history.push(`/details?id=${data._id}&tab=form`)
+    }
+
     return (
         
             <div className='card-full'>
@@ -49,7 +54,7 @@ export default function Card({data}) {
                     </div>
                 </div>
                 
-                <div className='card-lower'>
+                <div className='card-lower' onClick={openCard} style={{cursor:"pointer"}}>
                     <div className='time'>
                         <div className='time-details start'>
                             <h4 className='time-head'>Start Date and Time</h4>

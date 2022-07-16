@@ -8,15 +8,11 @@ import baseContext from "./Context/baseContext";
 import SignUp from './Components/SignUp';
 import FrontPage from './Components/FrontPage';
 import Creator from "./Components/CreatingForm/Creator";
-import Card from "./Components/Card";
 import YourForms from "./Components/YourForms";
-import Form from "./Components/Form";
-import ShowForm from "./Components/ShowForm";
-import ScoreCard from "./Components/ScoreCard";
-import QuesStatic from "./Components/QuesStatic";
 
 import FillContainer from "./Components/FillingForm/FillContainer";
 import FillState from "./Components/FillingForm/Context/FillState";
+import Form from "./Components/Formdetails/Form";
 function App() {
 	const context = useContext(baseContext);
 	/* eslint-disable */
@@ -49,13 +45,15 @@ function App() {
 				<Route exact path="/yourforms">
 					<YourForms />
 				</Route>
+				<Route exact path="/details">
+					<Form />
+				</Route>
 			</Switch>
 			{/* <FrontPage /> */}
 			{/* <HomePage /> */}
 			{/* <Card /> */}
 			{/* <YourForms /> */}
-			<Form />
-			<ScoreCard />
+			{/* <ScoreCard /> */}
 			{/* <ShowForm /> */}
 			{/* <QuesStatic /> */}
 		</Router>

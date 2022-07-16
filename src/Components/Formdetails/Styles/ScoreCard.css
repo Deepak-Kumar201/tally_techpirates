@@ -9,11 +9,11 @@
     background-color: lightslategray;
 }
 .scorecard{
-    width: 50%;
+    width: 40%;
     background-color: #243238;
     margin: 10px auto;
     border-radius: 20px;
-    padding: 20px;
+    padding: 15px 20px;
     display: flex;
     color: white;
     font-family: 'Roboto Slab', serif;
@@ -21,14 +21,31 @@
     align-items: center;
 }
 .scorecard:hover{
-    transform: scale(1.1);
+    transform: scale(1.025);
     box-shadow: 2px 3px 10px lightgray;
 }
 .scorecard-name h4{
     font-family: 'Roboto Slab', serif;
-    font-size: 25px;
+    font-size: 18px;
 }
 .scorecard-score h4{
     font-family: 'Roboto Slab', serif;
-    font-size: 25px;
+    font-size: 18px;
 }
+.scorecardCont{
+    padding-top: 20px;
+}
+
+.filter{
+    background-color: #141414;
+    color: white;
+    border: none;
+    width: 50%;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.filter:focus{
+    outline: none;
+}
+
