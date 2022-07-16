@@ -17,8 +17,10 @@ const getMarks =  async(req)=>{
 
 		for(var i of answers){
 			var queId = i.queId;
+		
 			var userResp = userAns[queId].ans;
-			console.log(userResp, i);
+			// console.log(userResp);
+			console.log(userResp, i.ans);
 			if(userResp.length == 0) {
 				pointArr.push(0);
 				i.wrong++;	

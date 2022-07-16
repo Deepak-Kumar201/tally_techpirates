@@ -23,10 +23,10 @@ export default function ShowForm({form, formQue}) {
     <div className='showForm-full'>
         <div className='showForm'>
             <div className='showForm-id' onClick={copyLink}>
-                <p className='showForm-Id-name'>Form Id: <div style={{color:"white", display:"inline", marginLeft:"30px"}}>{form._id}</div></p>
+                <p className='showForm-Id-name'>Quiz Id: <div style={{color:"white", display:"inline", marginLeft:"30px"}}>{form._id}</div></p>
             </div>
             <div className='showForm-form'>
-                <h2 className='showForm-form-head'>Here Is Your Form</h2>
+                <h2 className='showForm-form-head'>Here Is Your Quiz</h2>
                 <div className='usershowform'>
                     {
                         getForm(formQue)

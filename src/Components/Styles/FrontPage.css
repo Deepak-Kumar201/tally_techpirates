@@ -52,10 +52,12 @@
     border: 2px solid #6fcd07;
     color: white;
     padding: 5px;
+    font-family: 'Roboto Slab',serif;
 }
 
 .homebtn:hover{
     background-color: #6fcd0750;
+    transform: scale(1.05);
 }
 
 
@@ -93,6 +95,11 @@
     align-self: center;
     font-family: 'Playfair Display', serif;
     cursor: pointer;
+}
+
+.quiz-logo{
+    height: 70%;
+    padding-left: 40px;
 }
 
 .username

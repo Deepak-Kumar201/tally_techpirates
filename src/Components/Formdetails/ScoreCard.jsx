@@ -42,7 +42,7 @@ export default function ScoreCard() {
     return (
         <div className='scorecardCont'>
             <div>
-                <input type="number" className='scorecard filter' placeholder='Enter number to filter marks greater then provided' value={filter} onChange={(e)=>{setfilter(e.target.value)}}/>
+                <input type="number" className='scorecard filter' placeholder='Enter number to filter marks greater than provided' value={filter} onChange={(e)=>{setfilter(e.target.value)}}/>
             </div>
             <div>
                 {

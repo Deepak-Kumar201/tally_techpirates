@@ -5,6 +5,7 @@ import QuesStatic from './QuesStatic';
 import ScoreCard from './ScoreCard';
 import ShowForm from './ShowForm';
 import './Styles/Form.css';
+import Logo from '../../Images/logo.png';
 
 export default function Form() {
     const [url, seturl] = useState(new URL(window.location.href));
@@ -84,8 +85,11 @@ export default function Form() {
     return (
         <div className='form'>
             <div id="form-header">
-                <div className="form-logo">
+                {/* <div className="form-logo">
                     Welcome to Forms
+                </div> */}
+                <div className="form-logo">
+                    <img src={Logo} alt = "Quiz-Shetra logo" className="form-quiz-logo"/>
                 </div>
                 <div className="form-homeLog">
                     <div className="form-logbtn">
@@ -98,7 +102,7 @@ export default function Form() {
             </div>
             <div className='form-links'>
                 <div className='links link1'>
-                    <Link to = {`/details?id=${url.searchParams.get("id")}&tab=form`} className='linkname formdet' onClick={(e) => {highlight(e)}}>Form</Link>
+                    <Link to = {`/details?id=${url.searchParams.get("id")}&tab=form`} className='linkname formdet' onClick={(e) => {highlight(e)}}>Quiz</Link>
                 </div>
                 <div className='links link2'>
                     <Link to = {`/details?id=${url.searchParams.get("id")}&tab=statistics`} className='linkname statistics' onClick={(e) => {highlight(e)}}>Statistics</Link>

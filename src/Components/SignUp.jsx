@@ -183,7 +183,9 @@ export default function SignUp() {
                         <img src={GoogleImg} type="icon" alt="Google Icon" />
                       </button>
                 </div>
-            
+                <div className="loginoption-signup">
+                      Existing user? <Link to="/">Login</Link>
+                </div>
                 
             </div>
             </div>
