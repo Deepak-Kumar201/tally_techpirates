@@ -30,11 +30,13 @@ export default function YourForms() {
             <div className='forms-page-head'>
                 <h1 className='forms-page-heading'>Your Forms</h1>
             </div>
-            {
-                context.user.forms.map((elem, ind)=>{
-                    return <Card data={elem} key={ind}/>
-                })
-            }
+            <div className='allForms'>
+                {
+                    context.user.forms.map((elem, ind)=>{
+                        return <Card data={elem} key={ind}/>
+                    })
+                }
+            </div>
         </div>
   )
 }

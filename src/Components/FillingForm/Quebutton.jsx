@@ -10,7 +10,7 @@ export default function Quebutton(props) {
   }
 
   return (
-    <div className='fillNumber' style={{backgroundColor:context.ans[props.number - 1] != null?"blue":(context.curQue == props.number - 1)?"lightgreen":context.boxColor[props.number - 1]}} onClick={setCur}>
+    <div className='fillNumber' style={{backgroundColor:context.ans[props.number - 1] != null?((context.curQue == props.number - 1)?"violet":"blue"):(context.curQue == props.number - 1)?"lightgreen":context.boxColor[props.number - 1]}} onClick={setCur}>
         {props.number}
     </div>
   )

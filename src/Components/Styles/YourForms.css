@@ -118,3 +118,8 @@
     font-size: 40px;
 
 }
+
+.allForms{
+    display: flex;
+    flex-wrap: wrap;
+}
