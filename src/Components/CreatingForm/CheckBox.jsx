@@ -19,7 +19,7 @@ export default function CheckBox(props) {
 		setOptions(opt.concat([<div className="optionCont" id={`optCont${optionNo}`} key={`optCont${optionNo}`}>
 			<input className="form-check-input" type="checkbox" name={`${queID}`} id={`check${optionNo}`} style={{ margin: "auto 10px auto 0px" }} />
 			<input className="option" type="text" id={optionNo} placeholder="Option" style={{marginRight:"10px"}}/>
-			<input type="number" min="0" max="100" placeholder="Score" className="checkScore"/>
+			<input type="number" min="0" max="100" placeholder="Score" className="checkScore" defaultValue={0}/>
 			<i className="far fa-trash-alt" onClick={deleteOpt}></i>
 			</div>
 		]));
@@ -57,7 +57,7 @@ export default function CheckBox(props) {
 					context.timeBound == true?
 					(
 						<div>
-							<label>Time</label><input type="number" min="0" max="100"/>
+							<label>Time</label><input type="number" min="0" max="100" defaultValue={0}/>
 						</div>
 					):(<></>)
 				}
@@ -65,7 +65,7 @@ export default function CheckBox(props) {
 					context.timeBound == true && context.decreasing?
 					(
 						<div>
-							<label>Min Score</label><input type="number" min="0" max="100"/>
+							<label>Min Score</label><input type="number" min="0" max="100" defaultValue={0}/>
 						</div>
 					):(<></>)
 				}

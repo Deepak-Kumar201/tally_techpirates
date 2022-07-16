@@ -58,9 +58,9 @@ router.post('/create', resolveJWT, async (req, resp) => {
 	}
 })
 
-router.get("/getForm", async (req, resp) => {
+router.post("/getForm", async (req, resp) => {
 	try {
-		const data = await Forms.findById(req.body.fid);
+		const data = await Forms.findById(req.body.fId);
 
 		if (data == null) {
 			resp.status(400).send({ "error": "Form not found please check ID" });
@@ -78,13 +78,16 @@ router.get("/getForm", async (req, resp) => {
         }
 
 		//checking filledForms 
-		if(req.cookies.filled.indexOf(data.id) != -1){
+		var filled = req.cookies.filled;
+		if(!filled) filled = [];
+		if(filled.indexOf(data.id) != -1){
 			resp.status(400).send({"error":"You have already filled form"});
 			return;
 		}
         
 		resp.send(data);
 	} catch (err){
+		console.log(err);
 		resp.status(500).send({ "error": "Server error occured" });
 	}
 })

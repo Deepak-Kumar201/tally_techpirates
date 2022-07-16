@@ -27,14 +27,14 @@ export default function TextBox(props) {
 			</div>
 			<div className="properties">
 				<div>
-					<label>Score</label><input type="number" min="0" max="100"/>
+					<label>Score</label><input type="number" min="0" max="100" defaultValue={0}/>
 
 				</div>
 				{
 					context.timeBound == true?
 					(
 						<div>
-							<label>Time</label><input type="number" min="0" max="100"/>
+							<label>Time</label><input type="number" min="0" max="100" defaultValue={0}/>
 						</div>
 					):(<></>)
 				}
@@ -42,7 +42,7 @@ export default function TextBox(props) {
 					context.timeBound == true && context.decreasing?
 					(
 						<div>
-							<label>Min Score</label><input type="number" min="0" max="100"/>
+							<label>Min Score</label><input type="number" min="0" max="100" defaultValue={0}/>
 						</div>
 					):(<></>)
 				}

@@ -1,0 +1,92 @@
+#fillCont{
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    height: 100vh;
+    width: 100vw;
+}
+
+.fillright{
+    background-color: lightgrey;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-height: 100vh;
+}
+
+.fillleft{
+    position: relative;
+}
+
+.fillNumber{
+    width: 60px;
+    height: 60px;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 20px;
+    margin: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.questionCont{
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.filltimer{
+    background-color: whitesmoke;
+    border: 2px solid black;
+    width: 60px;
+    height: 60px;
+    display: grid;
+    place-items: center;
+    font-size: 20px;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}
+
+.questionHeading{
+    padding: 20px;
+    font-size: 20px;
+    line-height: 60px;
+}
+
+.questionStatement{
+    padding: 30px 100px;
+    color: white;
+}
+
+.fillquesans{
+    padding: 30px 20px;
+}
+
+.fillnextbtn{
+    width: 200px;
+    height: 50px;
+    border: none;
+    background-color: green;
+    color: white;
+    border-radius: 5px;
+    position: absolute;
+    bottom: 90px;
+    right: 60px;
+}
+
+.fillnextbtn:hover{
+    box-shadow: 0px 0px 10px green;
+}
+
+.submittest{
+    width: 100%;
+    background-color: red;
+    border:none;
+    padding: 15px 0px;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    text-align: center;
+}

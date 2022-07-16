@@ -201,7 +201,8 @@ const BaseState = (props) => {
                 if(data.error) return data;
                 var queelem = {
                     que : data.que,
-                    score : data.score
+                    score : data.score,
+                    type : "text"
                 };
                 if(data.ans.length == 0){
                     return {error:"Text Field without answer"};
@@ -211,6 +212,7 @@ const BaseState = (props) => {
                     points : data.points,
                     decreasing : decreasing,
                     minScore : decreasing?data.minScore:0,
+                    time : timeBound?data.time:-1,
                     queId : id,
                     wrong : 0,
                     right : 0
@@ -226,7 +228,8 @@ const BaseState = (props) => {
                 var queelem = {
                     que : data.que,
                     option : data.option,
-                    score : data.score
+                    score : data.score,
+                    type : "radio"
                 };
                 var anselem = {
                     ans : data.ans,
@@ -235,7 +238,8 @@ const BaseState = (props) => {
                     minScore : decreasing?data.minScore:0,
                     queId : id,
                     wrong : 0,
-                    right : 0
+                    right : 0,
+                    time : timeBound?data.time:-1,
                 }
                 formData[id] = JSON.stringify(queelem);
                 ans.push(anselem);
@@ -249,7 +253,8 @@ const BaseState = (props) => {
                 var queelem = {
                     que : data.que,
                     option : data.option,
-                    score : data.score
+                    score : data.score,
+                    type : "check"
                 };
                 var anselem = {
                     ans : data.ans,
@@ -258,7 +263,8 @@ const BaseState = (props) => {
                     minScore : decreasing?data.minScore:0,
                     queId : id,
                     wrong : 0,
-                    right : 0
+                    right : 0,
+                    time : timeBound?data.time:-1,
                 }
                 formData[id] = JSON.stringify(queelem);
                 ans.push(anselem);

@@ -18,7 +18,7 @@ const FormModel = new mongoose.Schema({
 		required: true
 	},
     time: {
-        type:[mongoose.Schema.Types.Date, mongoose.Schema.Types.Date],
+        type:[Number, Number],
         default : [-1, -1]
     },
     timeToAttempt : {
