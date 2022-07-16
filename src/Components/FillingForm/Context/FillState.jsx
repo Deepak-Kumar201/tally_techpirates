@@ -51,13 +51,14 @@ const FillState = (props) => {
             x = window.prompt("Enter your Name");
         }
 
-        setname(x);
+        setname(x.trim());
         
         const que = JSON.parse(JSON.parse(data));
         var arr = [];
         for(var i in que){
             var temp = JSON.parse(que[i]);
             temp.id = i;
+            temp.ind = arr.length
             arr.push(temp);
         }
         var clr = [], a = [];
@@ -70,6 +71,7 @@ const FillState = (props) => {
         setAns(a);
         setCurQueTimer(arr[0].time);
         setCurQue(0);
+        setLast(0);
     }
 
     useEffect(()=>{
@@ -77,15 +79,22 @@ const FillState = (props) => {
     }, [curQueTimer])
 
     const getNextQue = ()=>{
+        // updating timer
         var temp = queArr;
         temp[curQue].time = curQueTimer;
         setQueArr(temp);
+
+        //updating color
         var clr = boxColor;
         clr[curQue] = 'gray';
         setBoxColor(clr);
+
+        //updating ansarr
         var arr = ans;
-        arr[last] = newAns;
+        arr[curQue] = newAns;
         setAns(arr);
+
+        //getting next que with timer > 0
         for(var i = curQue + 1; i < temp.length +curQue + 1; i++){
             if(temp[i % temp.length].time !== 0) {
                 console.log(temp[i % temp.length]);
@@ -101,19 +110,22 @@ const FillState = (props) => {
     }, [ans]);
 
     useEffect(()=>{
-        console.log(curQue);
         if(curQue == -1){
-            console.log("object");
             submit();
             return;
         }
         if(curQue < queArr.length){
+            //updating timer
             var temp = queArr;
             temp[last].time = curQueTimer;
             setQueArr(temp);
+
+            //updating answer
             var arr = ans;
             arr[last] = newAns;
             setAns(arr);
+
+            //setting data            
             setLast(curQue);
             setNewAns(ans[curQue]);
             setCurQueTimer(queArr[curQue].time);

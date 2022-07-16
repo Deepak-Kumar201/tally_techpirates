@@ -118,14 +118,8 @@
     font-size: 40px;
 
 }
-.front-page-quiz-logo{
 
-    height: 70%;
-    padding-left: 40px;
-}
-.cards-display-forms-page
-{
+.allForms{
     display: flex;
     flex-wrap: wrap;
-    flex-direction: row;
 }

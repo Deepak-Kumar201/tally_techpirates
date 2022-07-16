@@ -30,12 +30,12 @@ export default function YourForms() {
             <div className='forms-page-head'>
                 <h1 className='forms-page-heading'>Your Quizzes</h1>
             </div>
-            <div className='cards-display-forms-page'>
-            {
-                context.user.forms.map((elem, ind)=>{
-                    return <Card data={elem} key={ind}/>
-                })
-            }
+            <div className='allForms'>
+                {
+                    context.user.forms.map((elem, ind)=>{
+                        return <Card data={elem} key={ind}/>
+                    })
+                }
             </div>
         </div>
   )

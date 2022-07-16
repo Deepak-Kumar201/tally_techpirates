@@ -6,7 +6,7 @@ export default function LeftFill() {
     const [data, setData] = useState(<></>);
 
     const getText = (que)=>{
-        return <textarea style={{width:"90%",height:"50vh", padding:"20px",resize:"none",border:"none",borderRadius:"10px"}} onChange={(e)=>{context.setNewAns([e.target.value])}} placeholder="Write Your Answer" defaultValue={context.ans[context.curQue]==null?"":context.ans[context.curQue][0]}></textarea>
+        return <textarea style={{width:"90%",height:"50vh", padding:"20px",resize:"none",border:"none",borderRadius:"10px"}} onChange={(e)=>{context.setNewAns([e.target.value])}} placeholder="Write Your Answer" defaultValue={context.ans[que.ind]==null?"":context.ans[que.ind][0]} key={que.id}></textarea>
     }
 
     const updateCheckAns = (id)=>{
@@ -23,13 +23,13 @@ export default function LeftFill() {
         if(!que.option)return<></>;
         que.option.forEach((i, ind)=>{
             temp.push(
-                <div className="form-check my-2" key={i}>
+                <div className="form-check my-2" key={que.id + i}>
                     <input
                         className="form-check-input"
                         type="radio"
                         id={"option" + ind}
                         name={que.id}
-                        defaultChecked={context.ans[context.curQue] == null?false:context.ans[context.curQue][ind]}
+                        defaultChecked={context.ans[que.ind] == null?false:context.ans[que.ind][ind]}
                         onChange = {()=>{updateCheckAns(que.id)}}
                     />
                     <label
@@ -49,13 +49,13 @@ export default function LeftFill() {
         if(!que.option)return<></>;
         que.option.forEach((i, ind)=>{
             temp.push(
-                <div className="form-check my-2" key={i}>
+                <div className="form-check my-2" key={que.id + i}>
                     <input
                         className="form-check-input"
                         type="checkbox"
                         id={"option" + ind}
                         name={que.id}
-                        defaultChecked={context.ans[context.curQue]?context.ans[context.curQue][ind]:false}
+                        defaultChecked={context.ans[que.ind]?context.ans[que.ind][ind]:false}
                         onChange = {()=>{updateCheckAns(que.id)}}
                     />
                     <label
@@ -67,6 +67,7 @@ export default function LeftFill() {
                 </div>
             )
         })  
+        console.log(temp);
         return temp;
     };
 
