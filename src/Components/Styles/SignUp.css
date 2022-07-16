@@ -106,33 +106,25 @@
 
 .signup-div
 {
+    margin: 0 auto;
     margin-top: 10px;
-    padding: 5px;
-    border: none;
-    border-radius: 50%;
     margin-bottom: 10px;
-    display: flex;
-    justify-content: space-evenly;
-}
-
-.signup-other{
-    color: white;
-    font-size: 17px;
-    padding: 8px;
 }
 .signup-option {
-    background-color: none;
-    border-radius: 50%;
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom: 0px;
+    padding: 8px 20px;
+    border-radius: 20px;
     border: none;
-    width: 30px;
-    height: 30px;
+    transition: all 0.5s;
+    background-color: white;
+    color: #6fcd07;
     font-size: 20px;
-    padding: 3px;
 }
 .signup-option:hover {
     box-shadow: 0px 0px 5px #d8ffab;
 }
-.signup-twitter
-{
-    color: #1DA1F2;
+.signup-option img{
+    height: 23px;
 }

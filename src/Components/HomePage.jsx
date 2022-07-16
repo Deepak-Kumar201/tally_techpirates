@@ -126,12 +126,10 @@ export default function HomePage(props) {
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
   const provider = new GoogleAuthProvider(app);
- 
-  
 
   const signinwithGoogle = (e) => {
     signInWithPopup(auth, provider)
-      .then((result) => {
+      .then(async (result) => {
         // This gives you a Google Access Token. You can use it to access the Google API.
         // console.log(result);
         const credential = GoogleAuthProvider.credentialFromResult(result);
@@ -140,7 +138,29 @@ export default function HomePage(props) {
         const user = result.user;
         console.log(user);
         // ...
+        context.startLoader();
+        var data = {
+          email: user.email,
+          password: user.uid,
+        };
+        var uri = "http://localhost:5000/api/user/signin";
+        var resp = await fetch(uri, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        });
+        resp = await resp.json();
+        context.stopLoader();
+        if (resp.error) {
+          context.showAlert(resp.error);
+          return;
+        }
+        localStorage.setItem("token", resp.token);
+        context.authUser();
       })
+
       .catch((error) => {
         // Handle Errors here.
         const errorCode = error.code;
@@ -151,8 +171,7 @@ export default function HomePage(props) {
         const credential = GoogleAuthProvider.credentialFromError(error);
         // ...
       });
-
-    };
+  };
 
   return (
     <>
@@ -246,6 +265,7 @@ export default function HomePage(props) {
                         className="admin-signin-btn"
                         onClick={signin}
                         type="submit"
+                        style = {{width: "90%"}}
                       >
                         Sign In
                       </button>
@@ -256,6 +276,7 @@ export default function HomePage(props) {
                         className=" signin-option"
                         id="signin-google"
                         onClick={signinwithGoogle}
+                        style = {{width: "90%"}}
                       >
                         Sign In with{" "}
                         <img src={GoogleImg} type="icon" alt="Google Icon" />
