@@ -16,6 +16,11 @@ export default function Alert(props) {
     }
 
     if (context.alert === false) return <></>;
+    const getForm = ()=>{
+        var fId = document.getElementById("data").value;
+        history.push(`/fill?id=${fId}`)
+        hideForm();
+    }
 
     if (context.type === "input") {
         return (
@@ -23,7 +28,7 @@ export default function Alert(props) {
                 <div className="alertBox">
                     <input type="text" className="alertBody" id="data" placeholder="Enter Form ID"/>
                     <div className="fillAlert cancelAlert" onClick={hideForm}>Cancel</div>
-                    <div className="fillAlert" >
+                    <div className="fillAlert" onClick={getForm}>
                         Ok
                     </div>
                 </div>

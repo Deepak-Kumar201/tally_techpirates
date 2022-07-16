@@ -95,9 +95,10 @@ export default function HomePage(props) {
             };
         }, 100);
     }, []);
-    const showNotif = ()=>{
-        const elem = document.getElementById("notification");
-        elem.style.height = "400px";
+    const getForm = (e)=>{
+        e.preventDefault();
+        var fId = document.getElementById("formId").value;
+        history.push(`/fill?id=${fId}`)
     }
     return (
         <>
@@ -147,10 +148,11 @@ export default function HomePage(props) {
                             <input type="text"
                             placeholder="Enter Form Id"
                             className="signin-inp"
+                            id="formId"
                             ></input>
                             </div>
 
-                            <button className="attendant-enter-btn">Enter</button>
+                            <button className="attendant-enter-btn" onClick={getForm}>Enter</button>
                         </form>
                         </>
                     ) : (

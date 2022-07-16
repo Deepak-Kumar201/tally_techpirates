@@ -19,7 +19,7 @@ export default function FrontPage() {
     };
 
     const myForms = () => {
-
+        history.push("/yourforms");
     };
 
     const logout = ()=>{

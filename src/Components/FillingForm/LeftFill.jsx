@@ -83,6 +83,15 @@ export default function LeftFill() {
         
     }, [context.dispQue])
 
+    useEffect(()=>{
+        setInterval(()=>{
+            var timer = document.querySelector(".filltimer");
+            if(!timer)return;
+            timer = parseInt(timer.innerHTML);
+            context.setCurQueTimer(timer - 1);
+        }, 1000)
+    }, [])
+
     return (
         <div>
             <div className="questionHeading">
@@ -98,7 +107,7 @@ export default function LeftFill() {
                     {data}
                 </div>
             </div>
-            <button className="fillnextbtn" onClick={(e)=>{e.preventDefault(); context.getNextQue()}}>Next</button>
+            <button className="fillnextbtn" onClick={(e)=>{e.preventDefault(); context.getNextQue()}}>Submit and Next</button>
         </div>
 
     );

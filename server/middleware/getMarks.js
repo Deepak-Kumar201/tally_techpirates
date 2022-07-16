@@ -1,51 +1,69 @@
+const Formans = require("../models/Formans");
+
 const getMarks =  async(req)=>{
 	try {
-		var answers = await Formans.find({fId : req.body.fId});
+		var answers = await Formans.findOne({fId : req.body.fId});
 		var id = answers.id;
 		if(!answers){
 			return {"error":"invalid form id"};
 		}
-		answers = answers.answer;
+		// console.log(answers);
+		answers = JSON.parse(answers.answer[0]);
+
 		var userAns = req.body.answer;
+		console.log(userAns);
 		var pointArr = [];
 		var sum = 0;
+
 		for(var i of answers){
-			var res = userAns[i.queId];
-			if(!res){
-				return {"error":"Invalid response"};
+			var queId = i.queId;
+			var userResp = userAns[queId].ans;
+			console.log(userResp, i);
+			if(userResp.length == 0) {
+				pointArr.push(0);
+				i.wrong++;	
+				continue;
 			}
-			var n = res.answer.length;
-			var m = i.answer.length;
-			if(n != m){
-				return {"error":"Invalid response"};
-			}
-			var points = 0;
+
+			var n = i.ans.length;
+			var point = 0;
 			for(var j = 0; j < n; j++){
-				if(res.answer[j] == i.answer[j]) points += i.points[j];
-				else if(isNaN(res.answer[j]) == false && isNaN(i.answer[j]) == false){
-					if(parseInt(res.answer[j]) == 0);
-					else {
-						points = 0;
-						i.wrong++;
-						break;
-					}
+				if(i.ans[j] === userResp[j])  {
+					console.log(i.ans[j], userResp[j]);
+					point+=i.points[j];
+				}
+				else {
+					// console.log(i.ans[j], userResp[j]);
+					point = 0;
+					i.wrong++;
+					break;
 				}
 			}
-			if(points != 0) i.right++;
-			if(i.decreasing){
-				points = Math.max((i.maxTime/res.timeTaken) * points, Math.min(points, i.min));
+			
+			if(point == 0) pointArr.push(0);
+			else{
+				i.right++;
+				if(i.decreasing){
+					var time = Math.max(0,(point - i.minScore));
+					time = ((i.time - userResp[queId].time)/i.time) * time + i.minScore;
+					pointArr.push(time);
+					sum += time;
+				}else{
+					pointArr.push(point); sum += point;
+				}
 			}
-			var qId = i.queId;
-			pointArr.push({qId : points});
-			sum += points;
 		}
+
+
+		
 		await Formans.findByIdAndUpdate(id, {
 			$set : {
-				answer : answers
+				answer : JSON.stringify(answers)
 			}
 		});
 		return {sum : sum, points : pointArr};
-	}catch{
+	}catch(error){
+		console.log(error);
 		return {error:"Server error"};
 	}
 }

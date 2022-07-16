@@ -24,7 +24,11 @@ const FormModel = new mongoose.Schema({
     timeToAttempt : {
         type : Number,
         default : -1
-    }
+    }, 
+	accepting:{
+		type:Boolean,
+		default : true
+	}
 })
 
 module.exports = mongoose.model("forms", FormModel);
