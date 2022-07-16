@@ -108,7 +108,7 @@ export default function HomePage(props) {
 
                     {type == "attendant" ? (
                         <>
-                        <h2 className="form-head-attendant">Take the Quiz</h2>
+                        <h2 className="form-head-attendant">Attend the Quiz</h2>
                         <form className="signin-attendant-form">
                             <div className="form-id">
                             <label className="signin-label">Enter Form Id</label>

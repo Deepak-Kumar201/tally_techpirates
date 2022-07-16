@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@1,800&display=swap");
-
+@import url('https://fonts.googleapis.com/css2?family=Poppins&family=Tiro+Kannada:ital@1&display=swap');
 *{
     padding: 0px;
     font-family: "Fira Sans", sans-serif;
@@ -63,6 +63,7 @@
 }
 
 /*Login Page */
+
 .signin-full
 {
     width: 100vw;
@@ -71,6 +72,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: lightslategray;
 }
 .signin{
     width: 30%;
@@ -81,6 +83,7 @@
     flex-direction: column;
     text-align: center;
     padding: 15px 0;
+    box-shadow: 3px 4px 15px black;
 }
 .admin-signin{
     position: relative;
@@ -94,7 +97,7 @@
 }
 
 .btn-option{
-    font-size: 14px;
+    font-size: 15px;
     margin: 0;
     padding: 8px 10px;
     border: none;
@@ -155,6 +158,7 @@
 .signin-msg
 {
     color: white;
+    padding-bottom: 15px;
 }
 .signin-admin-form
 {
@@ -166,7 +170,7 @@
     color: #6fcd07;
     font-size: 17px;
     align-self: flex-start;
-    padding-bottom: 6px;
+    padding-bottom: 4px;
 }
 .signin-inp
 {
@@ -175,10 +179,10 @@
     background-color: transparent;
     width: 100%;
     align-self: center;
-    font-size: 13px;
-    color: white;
     font-size: 15px;
-    padding: 5px;
+    color: white;
+    padding: 8px;
+    
 }
 .signin-inp:focus
 {
@@ -224,7 +228,7 @@
 .forgot
 {
     text-decoration: none;
-    font-size: 13px;
+    font-size: 15px;
     color: white;
     align-self: flex-end;
     display: block;
@@ -250,6 +254,11 @@
 .main-head
 {
     text-align: center;
+    margin-top: 5%;
+    font-weight: bolder;
+    font-size: 40px;
+    margin-bottom: 0;
+    font-family: 'Tiro Kannada', serif;
 
 }
 

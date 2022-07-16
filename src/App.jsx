@@ -5,7 +5,8 @@ import Alert from "./Components/Alert";
 import Loader from './Components/Loader';
 import HomePage from "./Components/HomePage";
 import baseContext from "./Context/baseContext";
-import Creator from "./Components/CreatingForm/Creator";
+import SignUp from './Components/SignUp';
+import FrontPage from './Components/FrontPage';
 
 function App() {
 	const context = useContext(baseContext);
@@ -17,7 +18,7 @@ function App() {
 
 	return (
 		<Router>
-			<Alert />
+			{/* <Alert />
 			<Loader />
 			<Switch>
 				<Route exact path="/">
@@ -28,8 +29,10 @@ function App() {
 					<Creator />
 				</Route>
 	
-			</Switch>
-
+			</Switch> */}
+			<SignUp />
+			{/* <FrontPage /> */}
+			{/* <HomePage /> */}
 		</Router>
 	);
 }

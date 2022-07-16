@@ -1,0 +1,138 @@
+.signup-full
+{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: lightslategray;
+}
+.signup{
+    width: 30%;
+    border-radius: 20px;
+    margin: auto;
+    background-color: #243238;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 15px 0;
+    box-shadow: 3px 4px 15px black;
+}
+.admin-signup{
+    position: relative;
+}
+
+
+.signup-admin-main
+{
+    padding-top: 20px;
+    padding-bottom: 7px;
+}
+
+.admin-signup-btn
+{
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 0px;
+    padding: 8px 20px;
+    border-radius: 20px;
+    border: none;
+    transition: all 0.5s;
+    background-color: #6fcd07;
+    color: white;
+    max-width: fit-content;
+    font-size: 20px;
+}
+
+/*Admin Form */
+
+.signup-msg
+{
+    color: white;
+    padding-bottom: 15px;
+}
+.signup-admin-form
+{
+    display: flex;
+    flex-direction: column;
+}
+.signup-admin-label
+{
+    color: #6fcd07;
+    font-size: 17px;
+    align-self: flex-start;
+    padding-bottom: 6px;
+}
+.signup-admin-inp
+{
+    border: none;
+    border-bottom: 1px solid white;
+    background-color: transparent;
+    width: 100%;
+    align-self: center;
+    font-size: 15px;
+    color: white;
+    padding: 5px;
+}
+.signup-admin-inp:focus
+{
+    outline: none;
+}
+.admin-password, .admin-email, .admin-password-confirm, .admin-name
+{
+    display: flex;
+    flex-direction: column;
+    padding: 5px 40px;
+}
+
+.admin-signup-btn:hover
+{
+    box-shadow: 0px 0px 10px #d8ffab;
+}
+
+.main-head
+{
+    text-align: center;
+    margin-top: 3%;
+    font-weight: bolder;
+    font-size: 40px;
+    margin-bottom: 0;
+    font-family: 'Poppins', sans-serif;
+    font-family: 'Tiro Kannada', serif;
+    
+}
+
+
+.signup-div
+{
+    margin-top: 10px;
+    padding: 5px;
+    border: none;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.signup-other{
+    color: white;
+    font-size: 17px;
+    padding: 8px;
+}
+.signup-option {
+    background-color: none;
+    border-radius: 50%;
+    border: none;
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+    padding: 3px;
+}
+.signup-option:hover {
+    box-shadow: 0px 0px 5px #d8ffab;
+}
+.signup-twitter
+{
+    color: #1DA1F2;
+}
