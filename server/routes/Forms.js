@@ -9,6 +9,7 @@ const router = express.Router();
 
 router.post('/create', resolveJWT, async (req, resp) => {
 	try {
+
 		const data = {
 			title : req.body.title,
 			description : req.body.description,
@@ -25,7 +26,10 @@ router.post('/create', resolveJWT, async (req, resp) => {
             resp.status(400).send("Invalid form description");
             return;
         }
-
+		if(User.count({_id:req.body.id}) == 0){
+			resp.send({error:"User auth failed"});
+			return;
+		}
         if(req.body.time) data.time = req.body.time;
         if(req.body.timeToAttempt) data.timeToAttempt = req.body.timeToAttempt;
         var newForm = new Forms(data);
@@ -72,7 +76,7 @@ router.post("/getForm", async (req, resp) => {
         if(time[0] == -1) timeValid = true;
         else if(time[0] < Date.now() && time[1] > Date.now()) timeValid = true;
         
-        if(timeValid == false){
+        if(timeValid == false || data.accepting == false){
             resp.status(400).send({"error" : "Form is not accepting respone now"});
             return;
         }
@@ -92,26 +96,32 @@ router.post("/getForm", async (req, resp) => {
 	}
 })
 
-router.put("/fill/", async (req, resp) => {
+router.put("/fill", async (req, resp) => {
 	try {
 		const data = await Forms.findById(req.body.fId);
         // checking time valid
+		if(!data){
+			resp.status(404).send({error:"Form Not Found"});
+			return;
+		}
         var time = data.time, timeValid = false;
         if(time[0] == -1) timeValid = true;
         else if(time[0] < Date.now() && time[1] > Date.now()) timeValid = true;
         
-        if(timeValid == false){
+        if(timeValid == false || data.accepting == false){
             resp.status(400).send({"error" : "Form is not accepting respone now"});
             return;
         }
 
 		//checking filledForms 
-		if(req.cookies.filled.indexOf(data.id) != -1){
+		var filled = req.cookies.filled;
+		if(!filled) filled = [];
+		if(filled.indexOf(data.id) != -1){
 			resp.status(400).send({"error":"You have already filled form"});
 			return;
 		}
 
-		var getM =getMarks(req);
+		var getM = await getMarks(req);
 		if(getM.error){
 			resp.status(400).send(getM);
 			return;
@@ -123,16 +133,20 @@ router.put("/fill/", async (req, resp) => {
 			marks : getM
 		};
 
-		await Formresp.findByIdAndUpdate(data.id, {
+		toAdd = JSON.stringify(toAdd);
+
+		await Formresp.findOneAndUpdate({fId:req.body.fId}, {
 			$push : {
 				responses : toAdd
 			}
 		});
 		filled = req.cookies.filled;
-		filled.push(req.params.id);
+		if(!filled) filled = [];
+		filled.push(req.body.fId);
 		resp.cookie('filled', filled, {httpOnly:true}).send({"success":"You responded successfully"});
 		
-	} catch {
+	} catch (err){
+		console.log(err);
 		resp.status(500).send({ "error": "Some server error occured try after some time" });
 	}
 })
@@ -142,6 +156,34 @@ router.post("/changeactive", resolveJWT, async(req, resp)=>{
 		var x = await Forms.updateOne({_id : req.body.fid, user : req.body.id}, {
 			$set:{
 				time : req.body.time
+			}
+		});
+		if(x.acknowledged == false){
+			resp.status(400).send({"error":"Cann't modify form option"});
+		}
+		console.log(x);
+		resp.status(200).send({success:"Time Updated"});
+	} catch (error) {
+		resp.status(500).send({ "error": "Some server error occured try after some time" });
+	}
+})
+
+router.post("/getanser", async (req, resp)=>{
+	var answers = await Formans.findOne({fId : req.body.fId});
+	var id = answers.id;
+	if(!answers){
+		return {"error":"invalid form id"};
+	}
+	console.log(answers);
+	// answers = JSON.parse(answers.answer);
+	resp.send({answers});
+});
+
+router.post('/updateRecieve', resolveJWT,async (req, resp)=>{
+	try {
+		var x = await Forms.updateOne({_id : req.body.fId, user : req.body.id}, {
+			$set:{
+				accepting : req.body.accepting
 			}
 		});
 		if(x.acknowledged == false){

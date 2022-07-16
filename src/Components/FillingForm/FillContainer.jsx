@@ -27,7 +27,7 @@ export default function FillContainer() {
                         })
                     }
                 </div>
-                <div className='submittest' onClick={context.submit}>Sumbit Test</div>
+                <div className='submittest' onClick={()=>{context.setCurQue(1e5);context.submit();}}>Sumbit Test</div>
             </div>
 
         </div>

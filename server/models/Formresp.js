@@ -6,18 +6,7 @@ const FormrespModel = new mongoose.Schema({
         required : true
     }, 
     responses :{
-        type : [
-            {
-                name : String,
-                resp : String,
-                marks : {
-                    type : {
-                        sum : Number,
-                        points : String
-                    }
-                }
-            }
-        ],
+        type : mongoose.Schema.Types.Array,
         default : []
     }
 })

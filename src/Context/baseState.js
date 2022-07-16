@@ -5,7 +5,7 @@ import baseContext from "./baseContext.js";
 const BaseState = (props) => {
     const [newForm, setNewForm] = useState([]);
     const [newQue, setnewQue] = useState(false);
-    const [user, setuser] = useState({_id:null});
+    const [user, setuser] = useState({_id:null, forms:[]});
     const [alert, setAlert] = useState(false);
     const [id, setID] = useState("");
     const [type, setType] = useState("input");
@@ -191,7 +191,7 @@ const BaseState = (props) => {
 
         title = child[1].children[2].value;
         description = child[2].children[2].value;
-        
+        console.log(timeBound);
         var n = child.length;
         for (var i = 3; i < n - 1; i++) {
             var id = child[i].getAttribute("id");
@@ -202,17 +202,18 @@ const BaseState = (props) => {
                 var queelem = {
                     que : data.que,
                     score : data.score,
-                    type : "text"
+                    type : "text",
+                    time : timeBound?parseInt(data.time):-1,
                 };
                 if(data.ans.length == 0){
                     return {error:"Text Field without answer"};
                 }
                 var anselem = {
                     ans : data.ans,
+                    time : timeBound?parseInt(data.time):-1,
                     points : data.points,
                     decreasing : decreasing,
                     minScore : decreasing?data.minScore:0,
-                    time : timeBound?data.time:-1,
                     queId : id,
                     wrong : 0,
                     right : 0
@@ -229,17 +230,18 @@ const BaseState = (props) => {
                     que : data.que,
                     option : data.option,
                     score : data.score,
-                    type : "radio"
+                    type : "radio",
+                    time : timeBound?parseInt(data.time):-1
                 };
                 var anselem = {
                     ans : data.ans,
                     points : data.points,
+                    time : timeBound?parseInt(data.time):-1,
                     decreasing : decreasing,
                     minScore : decreasing?data.minScore:0,
                     queId : id,
                     wrong : 0,
                     right : 0,
-                    time : timeBound?data.time:-1,
                 }
                 formData[id] = JSON.stringify(queelem);
                 ans.push(anselem);
@@ -254,17 +256,18 @@ const BaseState = (props) => {
                     que : data.que,
                     option : data.option,
                     score : data.score,
-                    type : "check"
+                    type : "check",
+                    time : timeBound?parseInt(data.time):-1
                 };
                 var anselem = {
                     ans : data.ans,
                     points : data.points,
+                    time : timeBound?parseInt(data.time):-1,
                     decreasing : decreasing,
                     minScore : decreasing?data.minScore:0,
                     queId : id,
                     wrong : 0,
                     right : 0,
-                    time : timeBound?data.time:-1,
                 }
                 formData[id] = JSON.stringify(queelem);
                 ans.push(anselem);

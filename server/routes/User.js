@@ -88,7 +88,7 @@ router.post("/signin", async (req, resp) => {
 
 router.post('/auth' , resolveJWT, async (req , res)=>{
     try {
-        const userData = await User.findById(req.body.id);
+        const userData = await User.findById(req.body.id).populate("forms");
         if(!userData){
             res.status(404).send({error:"User not found"});
             return;

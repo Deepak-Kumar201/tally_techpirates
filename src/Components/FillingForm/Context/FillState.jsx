@@ -1,11 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import baseContext from "../../../Context/baseContext";
 import FillContext from "./FillContext";
 
 
 const FillState = (props) => {
     const [title, settitle] = useState("");
+    const [name, setname] = useState("")
     const [desc, setdesc] = useState("");
+    const [fId, setfId] = useState("")
     const [queArr, setQueArr] = useState([]);
     const [newAns, setNewAns] = useState(null)
     const [boxColor, setBoxColor] = useState([]);
@@ -15,13 +18,14 @@ const FillState = (props) => {
     const [last, setLast] = useState(0);
     const [ans, setAns] = useState([]);
     const context = useContext(baseContext);
+    const history = useHistory();
 
     const getForm = async (id)=>{
         var uri = "http://localhost:5000/api/forms/getForm";
         var data = {
             fId : id
         }
-        console.log(data);
+        setfId(id);
 
         context.startLoader();
         var resp = await fetch(uri, {
@@ -33,11 +37,10 @@ const FillState = (props) => {
         });
 
         resp = await resp.json();
-        console.log(resp);
         context.stopLoader();
-        console.log(resp);
         if(resp.error){
             context.showAlert(resp.error);
+            history.push('/')
             return;
         }
         data = resp.data;
@@ -45,7 +48,6 @@ const FillState = (props) => {
         setdesc(resp.description);
         
         const que = JSON.parse(JSON.parse(data));
-        console.log(que);
         var arr = [];
         for(var i in que){
             var temp = JSON.parse(que[i]);
@@ -60,29 +62,27 @@ const FillState = (props) => {
         setBoxColor(clr);
         setQueArr(arr);
         setAns(a);
+        setCurQueTimer(arr[0].time);
         setCurQue(0);
     }
 
     useEffect(()=>{
-        setInterval(()=>{
-            setCurQueTimer(curQueTimer - 1);
-            if(curQueTimer == 0){
-                getNextQue();
-            }
-        }, 1000)
-    }, [])
-
+        if(curQueTimer == 0) getNextQue();
+    }, [curQueTimer])
 
     const getNextQue = ()=>{
         var temp = queArr;
-        temp[curQue].time = 0;
+        temp[curQue].time = curQueTimer;
         setQueArr(temp);
-        temp = boxColor;
-        temp[curQue] = 'gray';
-        setBoxColor(temp);
+        var clr = boxColor;
+        clr[curQue] = 'gray';
+        setBoxColor(clr);
+        var arr = ans;
+        arr[last] = newAns;
+        setAns(arr);
         for(var i = curQue + 1; i < temp.length +curQue + 1; i++){
-            console.log(i);
-            if(temp[i % temp.length].time != 0) {
+            if(temp[i % temp.length].time !== 0) {
+                console.log(temp[i % temp.length]);
                 setCurQue(i % temp.length);
                 return;
             }
@@ -91,12 +91,20 @@ const FillState = (props) => {
     }
 
     useEffect(()=>{
+        console.log(ans);
+    }, [ans]);
+
+    useEffect(()=>{
+        console.log(curQue);
         if(curQue == -1){
+            console.log("object");
             submit();
             return;
         }
-        console.log(curQue);
         if(curQue < queArr.length){
+            var temp = queArr;
+            temp[last].time = curQueTimer;
+            setQueArr(temp);
             var arr = ans;
             arr[last] = newAns;
             setAns(arr);
@@ -107,29 +115,55 @@ const FillState = (props) => {
         }
     }, [curQue])
 
-    useEffect(()=>{
-        console.log(dispQue);
-    }, [dispQue])
 
-    // useEffect(()=>{
-    //     console.log(curQueTimer);
-    // }, [curQueTimer])
-
-    const submit = ()=>{
+    const submit = async()=>{
         var filled = {};
         for(var i = 0; i < queArr.length; i++){
-            if(ans[i] !== null)filled[queArr[i].id] = ans[i];
-            else filled[queArr[i].id] = [];
+            filled[queArr[i].id] = {};
+            if(ans[i] !== null){
+                filled[queArr[i].id].ans = ans[i];
+                filled[queArr[i].id].time = queArr[i].time;
+            }
+            else {
+                filled[queArr[i].id].ans = [];
+            }
         }
-        
-        
+        console.log(filled);
+        context.startLoader();
+        var uri = "http://localhost:5000/api/forms/fill";
+        var data = {
+            name : name,
+            answer : filled,
+            fId : fId
+        }
+
+        var resp = await fetch(uri, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        });
+
+        resp = await resp.json();
+        console.log(resp);
+        context.stopLoader();
+
+        if(resp.error){
+            context.showAlert(resp.error);
+            history.push('/')
+            return;
+        }
+
+        context.showAlert("Form Submitted Successfully");
+        history.push("/");
     }
 
 
     return (
         <FillContext.Provider
             value={{
-                getNextQue,getForm,title, settitle,desc, setdesc,queArr, setQueArr,dispQue, setdispQue, curQueTimer, setCurQueTimer,curQue, setCurQue,boxColor, setBoxColor, ans, setAns, newAns, setNewAns, submit
+                getNextQue,getForm,title, settitle,desc, setdesc,queArr, setQueArr,dispQue, setdispQue, curQueTimer, setCurQueTimer,curQue, setCurQue,boxColor, setBoxColor, ans, setAns, newAns, setNewAns, submit, name, setname
             }}
         >
             {props.children}
