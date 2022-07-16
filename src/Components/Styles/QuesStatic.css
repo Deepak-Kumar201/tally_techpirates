@@ -1,0 +1,22 @@
+.quesstatic{
+    width: 100vw;
+    min-height: 90vh;
+    background-color: lightslategray;
+    padding: 50px 0;
+}  
+.quesstatic-accor{
+    width: 60%;
+    margin: 10px auto;
+
+}
+.quesstatic-accor:hover{
+    transform: scale(1.05);
+    /* box-shadow: 2px 3px 3px lightgray; */
+
+}
+.accordion-button{
+    background-color: #243238;
+    color: #6fcd07;
+    font-family: 'Roboto Slab', serif;
+    font-size: 20px;
+}

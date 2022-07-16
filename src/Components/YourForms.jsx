@@ -6,6 +6,11 @@ import './Styles/YourForms.css';
 
 
 export default function YourForms() {
+    const logout = ()=>{
+        localStorage.clear('token');
+        window.location.reload();
+    }
+
     const context = useContext(baseContext);
     return (
         <div className='forms-page'>
@@ -17,7 +22,7 @@ export default function YourForms() {
                     <div className="forms-page-logbtn">
                         <Link to = "/" className='forms-page-home'>Home</Link>
                     </div>
-                    <div className="forms-page-logbtn" onClick={() => {}}>
+                    <div className="forms-page-logbtn" onClick={logout}>
                         Logout
                     </div>
                 </div>

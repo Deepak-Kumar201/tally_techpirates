@@ -8,12 +8,12 @@
     margin: 0px;
     scroll-behavior: smooth;
 }
-.forms-page{
+.form{
     background-color: lightslategray;
     width: 100vw;
-    min-height: 100vh;
+    /* min-height: 100vh; */
 }
-#forms-page-header{
+#form-header{
     display: flex;
     height: 12vh;
     font-size: 30px;
@@ -22,10 +22,10 @@
     color: white;
     background-color: #141414;
 }
-.forms-page-homeLog{
+.form-homeLog{
     display: flex;
 }
-.forms-page-logo{
+.form-logo{
     height: 100%;
     margin-left: 20px;
     line-height: 11vh;
@@ -34,7 +34,7 @@
     font-family: 'Playfair Display', serif;
     cursor: pointer;
 }
-.forms-page-username
+.form-username
 {
     color: #6fcd07;
     font-size: 20px;    
@@ -42,7 +42,7 @@
     align-self: center;
     cursor: pointer;
 }
-.forms-page-logbtn{
+.form-logbtn{
     width: 10vw;
     text-align: center;
     cursor: pointer;
@@ -58,63 +58,88 @@
     font-family: 'Roboto Slab', serif;
 }
 
-.forms-page-logbtn:hover{
+.form-logbtn:hover{
     box-shadow: 2px 2px 4px lightgray;
 
 }
-.forms-page-home{
+.form-home{
     text-decoration: none;
     color: white;
     font-family: 'Roboto Slab', serif;
 }
-.forms-page-home:hover{
+.form-home:hover{
     text-decoration: none;
     color: white;
 }
 @media screen and (max-width:1200px) {
-    .forms-page-logbtn{
+    .form-logbtn{
         font-size: 17px;
         width: 17vw;
     }
 }
 
 @media screen and (max-width:800px) {
-    .forms-page-logbtn{
+    .forms-logbtn{
         font-size: 17px;
         width: 25vw;
     }
 
-    .forms-page-logo{
+    .forms-logo{
         font-size: 27px;
     }
 
 }
 @media screen and (max-width:600px) {
-    .forms-page-logbtn{
+    .forms-logbtn{
         font-size: 17px;
         width: 30vw;
     }
-    .forms-page-logo{
+    .forms-logo{
         font-size: 25px;
     }
 
 }
 @media screen and (max-width:400px) {
-    .forms-page-logbtn{
+    .forms-logbtn{
         font-size: 15px;
         width: 30vw;
     }
-    .forms-page-logo{
+    .forms-logo{
         font-size: 17px;
     }
 
 }
 
-.forms-page-heading{
-    text-align: center;
+.form-links{
+    width: 100vw;
+    padding: 15px 20%;
+    margin: 0;
+    display: flex;
+    background-color: #141414;
+    color: white;
+}
+.links{
+    margin: 0 10%;
+    justify-content: center;
+    
+}
+.linkname{
+    text-decoration: none;
+    color: white;
     font-family: 'Roboto Slab', serif;
-    margin: 30px 0;
-    font-weight: bolder;
-    font-size: 40px;
-
+    font-size: 25px;
+}
+.linkname:hover{
+    text-decoration: none;
+    color: #6fcd07;
+    border-width: 0 0 2px 0;
+    border-style: solid;
+    border-color: #6fcd07;
+}
+.highlight{
+    color: #6fcd07;
+    border-width: 0 0 2px 0;
+    border-style: solid;
+    border-color: #6fcd07;
+    
 }

@@ -10,6 +10,11 @@ import FrontPage from './Components/FrontPage';
 import Creator from "./Components/CreatingForm/Creator";
 import Card from "./Components/Card";
 import YourForms from "./Components/YourForms";
+import Form from "./Components/Form";
+import ShowForm from "./Components/ShowForm";
+import ScoreCard from "./Components/ScoreCard";
+import QuesStatic from "./Components/QuesStatic";
+
 function App() {
 	const context = useContext(baseContext);
 	/* eslint-disable */
@@ -39,7 +44,11 @@ function App() {
 			{/* <FrontPage /> */}
 			{/* <HomePage /> */}
 			{/* <Card /> */}
-			<YourForms />
+			{/* <YourForms /> */}
+			<Form />
+			<ScoreCard />
+			{/* <ShowForm /> */}
+			{/* <QuesStatic /> */}
 		</Router>
 	);
 }

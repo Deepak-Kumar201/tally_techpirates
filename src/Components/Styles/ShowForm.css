@@ -1,0 +1,46 @@
+.showForm-full
+{
+    min-height: 90vh;
+    background-color: lightslategray;
+    width: 100%;
+    padding: 50px;
+}
+.showForm{
+    width: 60%;
+    margin: 0 auto;
+    
+}
+.showForm-id{
+    width: 100%;
+    background-color: #243238;
+    margin: 10px auto;
+    border-radius: 20px;
+    padding: 20px 10px;
+    color: white;
+    font-family: 'Roboto Slab', serif;
+    align-items: center;
+}
+.showForm-Id-name{
+    width: 100%;
+    font-family: 'Roboto Slab', serif;
+    font-size: 30px;
+    margin-left: 20px;
+    color: #6fcd07;
+}
+.showForm-Id-link{
+    width: 100%;
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    margin-left: 20px;
+    font-family: 'Roboto Slab', serif;
+    border: 1px solid red;
+}
+.showForm-form-head{
+    margin: 40px auto;
+    text-align: center;
+    font-size: 40px;
+    font-family: 'PT Serif', serif;
+    font-weight: bolder;
+    text-decoration: underline;
+}
