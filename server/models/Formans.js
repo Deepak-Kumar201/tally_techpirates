@@ -14,7 +14,7 @@ const FormansModel = new mongoose.Schema({
                     type : Number,
                     default : 0
                 },
-                min : Number,
+                minScore : Number,
                 queId : String,
                 wrong : {
                     type:Number,
