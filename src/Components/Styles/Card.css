@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,700&family=Poppins&family=Roboto+Slab:wght@300;400&family=Tiro+Kannada:ital@1&display=swap');
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+
+/* Toggle */
+.toggle {
+  cursor: pointer;
+  display: inline-block;
+}
+
+.toggle-switch {
+  display: inline-block;
+  background: #ccc;
+  border-radius: 16px;
+  width: 58px;
+  height: 32px;
+  position: relative;
+  vertical-align: middle;
+  transition: background 0.25s;
+}
+.toggle-switch:before, .toggle-switch:after {
+  content: "";
+}
+.toggle-switch:before {
+  display: block;
+  background: linear-gradient(to bottom, #fff 0%, #eee 100%);
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25);
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  transition: left 0.25s;
+}
+.toggle:hover .toggle-switch:before {
+  background: linear-gradient(to bottom, #fff 0%, #fff 100%);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.5);
+}
+.toggle-checkbox:checked + .toggle-switch {
+  background: #6fcd07;
+}
+.toggle-checkbox:checked + .toggle-switch:before {
+  left: 30px;
+}
+
+.toggle-checkbox {
+  position: absolute;
+  visibility: hidden;
+}
+
+.toggle-label {
+  margin-left: 5px;
+  position: relative;
+  top: 2px;
+}
+
+/* Toggle */
+
+.card{
+    background-color: #778899;
+    width: 100vw;
+    height: 100vh;
+}
+.card-full
+{
+    width: 400px;
+    background-color: #243238;
+    border: 1px solid lightgray;
+    border-radius: 30px;
+    box-shadow: 3px 3px 10px lightgray;
+    margin: 100px;
+}
+.card-upper{
+    padding: 25px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #243238;
+    border-radius: 30px;
+    align-items: center;
+}
+
+.form-name
+{
+    color: white;
+    font-size: 30px;
+    text-decoration: none;
+    font-family: 'Roboto Slab', serif;
+}
+.form-name:hover
+{
+    color: white;
+    cursor: pointer;
+}
+
+
+.card-lower
+{
+    padding: 25px;
+    background-color: white;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-status h4{
+  font-family: 'Roboto Slab', serif;
+  font-weight: bold;
+}
+
+.time-head
+{
+    font-family: 'Roboto Slab', serif;
+    font-size: 20px;
+    font-weight: bold;
+}
+.time-details p time{
+    /* color: #6fcd07; */
+    color: darkgrey;
+}

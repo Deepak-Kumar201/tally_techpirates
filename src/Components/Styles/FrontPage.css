@@ -1,6 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@1,800&display=swap");
 
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,700&family=Poppins&family=Tiro+Kannada:ital@1&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,700&family=Poppins&family=Roboto+Slab:wght@300;400&family=Tiro+Kannada:ital@1&display=swap');
+
 *{
     padding: 0px;
     font-family: "Fira Sans", sans-serif;
@@ -8,7 +11,7 @@
     scroll-behavior: smooth;
 }
 
-#homeLower{
+#homeP{
     width: 100vw;
     height: 100vh;
     position: absolute;
@@ -89,6 +92,7 @@
     font-size: 35px;
     align-self: center;
     font-family: 'Playfair Display', serif;
+    cursor: pointer;
 }
 
 .username
@@ -98,6 +102,7 @@
     margin-right: 20px;
     align-self: center;
     cursor: pointer;
+    font-family: 'Roboto Slab', serif;
 }
 
 .logbtn{
@@ -113,6 +118,7 @@
     font-size: 20px;
     background-color: #6fcd07;
     color: white;
+    font-family: 'Roboto Slab', serif;
 }
 
 .logbtn:hover{

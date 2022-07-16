@@ -17,7 +17,7 @@ export default function SignUp() {
 
         if(ConfPass != Pass)
         {
-            context.showAlert("Enter Valid details");
+            context.showAlert("Pass");
             return;
         }
         else

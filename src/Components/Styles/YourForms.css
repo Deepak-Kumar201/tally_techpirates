@@ -1,0 +1,116 @@
+@import url("https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@1,800&display=swap");
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,700&family=Poppins&family=Tiro+Kannada:ital@1&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,700&family=Poppins&family=Roboto+Slab:wght@300;400&family=Tiro+Kannada:ital@1&display=swap');
+*{
+    padding: 0px;
+    margin: 0px;
+    scroll-behavior: smooth;
+}
+.forms-page{
+    background-color: lightslategray;
+    width: 100vw;
+    min-height: 100vh;
+}
+#forms-page-header{
+    display: flex;
+    height: 12vh;
+    font-size: 30px;
+    justify-content: space-between;
+    align-content: center;
+    color: white;
+    background-color: #141414;
+}
+.forms-page-homeLog{
+    display: flex;
+}
+.forms-page-logo{
+    height: 100%;
+    margin-left: 20px;
+    line-height: 11vh;
+    font-size: 35px;
+    align-self: center;
+    font-family: 'Playfair Display', serif;
+    cursor: pointer;
+}
+.forms-page-username
+{
+    color: #6fcd07;
+    font-size: 20px;    
+    margin-right: 20px;
+    align-self: center;
+    cursor: pointer;
+}
+.forms-page-logbtn{
+    width: 10vw;
+    text-align: center;
+    cursor: pointer;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 40px;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 20px;
+    font-size: 20px;
+    background-color: #6fcd07;
+    color: white;
+    font-family: 'Roboto Slab', serif;
+}
+
+.forms-page-logbtn:hover{
+    box-shadow: 2px 2px 4px lightgray;
+
+}
+.forms-page-home{
+    text-decoration: none;
+    color: white;
+    font-family: 'Roboto Slab', serif;
+}
+@media screen and (max-width:1200px) {
+    .forms-page-logbtn{
+        font-size: 17px;
+        width: 17vw;
+    }
+}
+
+@media screen and (max-width:800px) {
+    .forms-page-logbtn{
+        font-size: 17px;
+        width: 25vw;
+    }
+
+    .forms-page-logo{
+        font-size: 27px;
+    }
+
+}
+@media screen and (max-width:600px) {
+    .forms-page-logbtn{
+        font-size: 17px;
+        width: 30vw;
+    }
+    .forms-page-logo{
+        font-size: 25px;
+    }
+
+}
+@media screen and (max-width:400px) {
+    .forms-page-logbtn{
+        font-size: 15px;
+        width: 30vw;
+    }
+    .forms-page-logo{
+        font-size: 17px;
+    }
+
+}
+
+.forms-page-heading{
+    text-align: center;
+    font-family: 'Roboto Slab', serif;
+    margin: 30px 0;
+    font-weight: bolder;
+    font-size: 40px;
+
+}

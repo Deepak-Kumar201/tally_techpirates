@@ -29,7 +29,7 @@ export default function FrontPage() {
 
     return (
         <>
-            <div id="homeLower">
+            <div id="homeP">
                 <div id="header">
                     <div className="logo">
                         Welcome to Forms

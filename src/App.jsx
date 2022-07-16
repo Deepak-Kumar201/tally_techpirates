@@ -8,7 +8,8 @@ import baseContext from "./Context/baseContext";
 import SignUp from './Components/SignUp';
 import FrontPage from './Components/FrontPage';
 import Creator from "./Components/CreatingForm/Creator";
-
+import Card from "./Components/Card";
+import YourForms from "./Components/YourForms";
 function App() {
 	const context = useContext(baseContext);
 	/* eslint-disable */
@@ -21,7 +22,7 @@ function App() {
 
 	return (
 		<Router>
-			<Alert />
+			{/* <Alert />
 			<Loader />
 			<Switch>
 				<Route exact path="/">
@@ -34,9 +35,11 @@ function App() {
 					<Creator />
 				</Route>
 	
-			</Switch>
+			</Switch> */}
 			{/* <FrontPage /> */}
 			{/* <HomePage /> */}
+			{/* <Card /> */}
+			<YourForms />
 		</Router>
 	);
 }

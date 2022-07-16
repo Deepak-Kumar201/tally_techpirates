@@ -49,7 +49,6 @@
 #homeLower{
     width: 100vw;
     height: 200vh;
-    background-color: aquamarine;
     position: absolute;
     z-index: -1;
 }

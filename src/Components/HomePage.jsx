@@ -101,12 +101,12 @@ export default function HomePage(props) {
     }
     return (
         <>
-            {/* <div id="homeUpper" style={{display : localStorage.getItem("hiddenBar")?"none":"auto"}}>
+            <div id="homeUpper" style={{display : localStorage.getItem("hiddenBar")?"none":"auto"}}>
                 <div id="homeWel">
                     <h1>Welcome To Forms</h1>
                     <h4>Change the Way you Work</h4>
                 </div>
-            </div> */}
+            </div>
             <div id="homeLower">
                 <div className="signin-full">
                 <h2 className="main-head"> Welcome to Forms</h2>
