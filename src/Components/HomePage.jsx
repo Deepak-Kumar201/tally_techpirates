@@ -2,11 +2,11 @@ import "./Styles/HomePage.css";
 import baseContext from "../Context/baseContext";
 import { useContext, useEffect } from "react";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 export default function HomePage(props) {
     const context = useContext(baseContext);
-
+    const history = useHistory();
     const [type, settype] = useState("admin");
     const chooseAdmin = () => {
         settype("admin");
@@ -14,6 +14,36 @@ export default function HomePage(props) {
     const chooseAttend = () => {
         settype("attendant");
     };
+
+    const signin = async (e)=>{
+        e.preventDefault();
+        
+        var email = document.getElementById("signinemail").value;
+        var password = document.getElementById("signinpass").value;
+        var data = {
+            email : email,
+            password : password
+        }
+        console.log(data);
+        var uri = "http://localhost:5000/api/user/signin";
+        var resp = await fetch(uri, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+            });
+        resp = await resp.json();
+        if(resp.error){
+            context.showAlert(resp.error);
+            return;
+        }
+        localStorage.setItem('token', resp.token);
+        context.authUser();
+        // history.push("/");
+
+    
+    }
 
     useEffect(() => {
         setTimeout(() => {
@@ -69,12 +99,12 @@ export default function HomePage(props) {
     }
     return (
         <>
-            <div id="homeUpper" style={{display : localStorage.getItem("hiddenBar")?"none":"auto"}}>
+            {/* <div id="homeUpper" style={{display : localStorage.getItem("hiddenBar")?"none":"auto"}}>
                 <div id="homeWel">
                     <h1>Welcome To Forms</h1>
                     <h4>Change the Way you Work</h4>
                 </div>
-            </div>
+            </div> */}
             <div id="homeLower">
                 <div className="signin-full">
                 <h2 className="main-head"> Welcome to Forms</h2>
@@ -131,6 +161,7 @@ export default function HomePage(props) {
                             type="email"
                             placeholder="Enter your email"
                             className="signin-inp"
+                            id="signinemail"
                             ></input>
                             </div>
 
@@ -140,12 +171,14 @@ export default function HomePage(props) {
                             type="password"
                             className="signin-inp"
                             placeholder="Enter your password here"
+                            id="signinpass"
+                            required={true}
                             ></input>
                             </div>
                             <a href="" className="forgot">
                             Forgot Password?
                             </a>
-                            <button className="admin-signin-btn">Sign In</button> 
+                            <button className="admin-signin-btn" onClick={signin}>Sign In</button> 
                         </form>
 
 
@@ -163,7 +196,7 @@ export default function HomePage(props) {
 
 
                         <div className="signupoption">
-                        New user? <Link to="/">Create an account</Link>
+                        New user? <Link to="/signup">Create an account</Link>
                         </div>
                         </>
                     )}

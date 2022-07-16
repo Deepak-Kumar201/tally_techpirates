@@ -7,30 +7,34 @@ import HomePage from "./Components/HomePage";
 import baseContext from "./Context/baseContext";
 import SignUp from './Components/SignUp';
 import FrontPage from './Components/FrontPage';
+import Creator from "./Components/CreatingForm/Creator";
 
 function App() {
 	const context = useContext(baseContext);
 	/* eslint-disable */
-	
 	window.onload = () => {
 		context.stopLoader();
 	}
+	useEffect(()=>{
+		if(localStorage.getItem('token'))context.authUser();
+	}, [])
 
 	return (
 		<Router>
-			{/* <Alert />
+			<Alert />
 			<Loader />
 			<Switch>
 				<Route exact path="/">
-					<HomePage />
+					{context.user._id?<FrontPage />:<HomePage/>}
 				</Route>
-
-				<Route exact path="/test">
+				<Route exact path="/signup">
+					<SignUp />
+				</Route>
+				<Route exact path="/create">
 					<Creator />
 				</Route>
 	
-			</Switch> */}
-			<SignUp />
+			</Switch>
 			{/* <FrontPage /> */}
 			{/* <HomePage /> */}
 		</Router>

@@ -1,11 +1,12 @@
 import React, { useContext } from "react";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import "./Styles/SignUp.css";
 import baseContext from "../Context/baseContext";
 
 export default function SignUp() {
     const context = useContext(baseContext);
+    const history = useHistory();
     const SubmitData = async(e) => {
         e.preventDefault();
         const url = "http://localhost:5000/api/user/signup";
@@ -16,7 +17,8 @@ export default function SignUp() {
 
         if(ConfPass != Pass)
         {
-            // context.showAlert("Enter Valid details");
+            context.showAlert("Enter Valid details");
+            return;
             // context.stopLoader();
         }
         else
@@ -26,16 +28,21 @@ export default function SignUp() {
                 "email" : Email,
                 "password": Pass
             }
-    
             var resp = await fetch(url, {
                 method: 'POST',
                 headers: {
-                  'Content-Type': 'application/json',
+                    'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(JsonObj),
-              });
+                });
             resp = await resp.json();
-            console.log(resp);
+            if(resp.error){
+                context.showAlert(resp.error);
+                return;
+            }
+            localStorage.setItem('token', resp.token);
+            history.push("/");
+            window.location.reload();
         }  
     };
 

@@ -8,18 +8,25 @@ import FormImg from '../Images/form-main.svg';
 
 export default function FrontPage() {
     const context = useContext(baseContext);
+    const history = useHistory();
     const showAlert = () => {
         context.setType("input");
         context.setAlert(true);
     };
 
     const createForm = () => {
-        
-        
+        history.push("/create");
     };
 
     const myForms = () => {
+
     };
+
+    const logout = ()=>{
+        localStorage.clear('token');
+        window.location.reload();
+    }
+
     return (
         <>
             <div id="homeLower">
@@ -29,9 +36,9 @@ export default function FrontPage() {
                     </div>
                     <div className="homeLog">
                         <div className="username" onClick={()=>{}}>
-                            Hii, Abc
+                            Hii, {context.user.name}
                         </div>
-                        <div className="logbtn" onClick={()=>{}}>
+                        <div className="logbtn" onClick={logout}>
                             Logout
                         </div>
                     </div>

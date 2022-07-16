@@ -5,7 +5,7 @@ import baseContext from "./baseContext.js";
 const BaseState = (props) => {
     const [newForm, setNewForm] = useState([]);
     const [newQue, setnewQue] = useState(false);
-    const [user, setuser] = useState({});
+    const [user, setuser] = useState({_id:null});
     const [alert, setAlert] = useState(false);
     const [id, setID] = useState("");
     const [type, setType] = useState("input");
@@ -35,6 +35,27 @@ const BaseState = (props) => {
         ring.classList.add("hiddenLoader");
     }
 
+    const authUser =async ()=>{
+        const uri = "http://localhost:5000/api/user/auth";
+        const data = {
+            "token": localStorage.getItem('token')
+        }
+        var resp = await fetch(uri, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        });
+        resp = await resp.json();
+        if(resp.error){
+            showAlert(resp.error);
+            localStorage.clear("token");
+        }else{
+            console.log(resp)
+            setuser(resp.user);
+        }
+    }
 
     const textField =  (id)=>{
         var text = document.getElementById(id);
@@ -255,9 +276,9 @@ const BaseState = (props) => {
             time : time
         };
         console.log(data);
-        return;
+        // return;
         
-        const url = "https://digital-forms.herokuapp.com/api/form/create";
+        const url = "";
         startLoader();
 
         var resp = await fetch(url, {
@@ -310,8 +331,7 @@ const BaseState = (props) => {
                 setTimeBound,
                 decreasing, 
                 setDecreasing,
-                textField,
-                radioField,checkField
+                authUser
             }}
         >
             {props.children}

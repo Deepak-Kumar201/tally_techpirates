@@ -47,15 +47,13 @@ router.post("/signup", async (req, resp) => {
 			email: email,
 			password: password,
 		})
-
-
 		newUser.save();
 
 		var jwtTokken = jwt.sign({
 			id: newUser.id
 		}, "hj4h5432j5h$$Fh5i348u98**HU(*YGY$G#JH#)");
-
-        resp.cookie("token", jwtTokken, {httpOnly:true}).send({ "success": "Signed Up"});
+        // resp.cookie("token", jwtTokken, {httpOnly:true});
+        resp.send({ "token": jwtTokken});
 
 	} catch (err){
         console.log(err)
@@ -72,7 +70,6 @@ router.post("/signin", async (req, resp) => {
 			resp.status(404).send({ "error": "Email not registered" });
 			return;
 		}
-
         if(await bcrypt.compare(req.body.password, oldData.password) === false){
             resp.status(401).send({"error":"User details invalid"})
             return;
@@ -82,7 +79,7 @@ router.post("/signin", async (req, resp) => {
 			id: oldData.id
 		}, "hj4h5432j5h$$Fh5i348u98**HU(*YGY$G#JH#)");
 
-		resp.cookie("token", jwtTokken, {httpOnly:true}).send({ "success": "Logged in"});
+		resp.send({ "token": jwtTokken});
 	} catch (err){
         console.log(err);
 		resp.status(500).send({ "error": "Some server error occured try after some time" });

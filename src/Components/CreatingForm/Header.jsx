@@ -18,7 +18,7 @@ export default function Header() {
 			<div className="container">
 				<div className="formSetting">
 					<div>
-						<input type="checkbox" name="foreverAccpet" id="foreverAccpet" className="form-check-input" checked={alwaysAccpet} onChange={(e)=>{setalwaysAccpet(e.target.checked)}}/> <label htmlFor="foreverAccpet">Always Accept Response</label>
+						<input type="checkbox" name="foreverAccpet" id="foreverAccpet" className="form-check-input" checked={alwaysAccpet} onChange={(e)=>{setalwaysAccpet(e.target.checked)}}/> <label htmlFor="foreverAccpet">Decide Later</label>
 					</div>
 					{
 					alwaysAccpet == false?(
