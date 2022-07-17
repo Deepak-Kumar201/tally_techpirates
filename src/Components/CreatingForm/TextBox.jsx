@@ -6,7 +6,12 @@ export default function TextBox(props) {
 	const queID = props.queID;
 
 	const deleteQue = () => {
-		document.getElementById(`cont${queID}`).remove();
+		try{
+			document.getElementById(`cont${queID}`).childNodes.forEach((elem)=>elem.remove());
+			document.getElementById(`cont${queID}`).style.display="none";
+		}catch(err){
+			console.log(err);
+		}
 	}
 
 	function autoResize(e) {
@@ -20,7 +25,7 @@ export default function TextBox(props) {
 			<textarea type="text" className="form-control" placeholder="Enter Statement"  rows="1" onInput={autoResize} style={{ resize: "none" }}></textarea>
 			<hr />
 			<div className="textAreaAnswer">
-				<textarea type="text" className="form-control" placeholder="Enter Answer"  rows="1" onInput={autoResize} style={{ resize: "none" }}></textarea>
+				<textarea type="text" className="form-control answer" placeholder="Enter Answer"  rows="1" onInput={autoResize} style={{ resize: "none" }}></textarea>
 			</div>
 			<div className="action">
 				<button className="btn btn-danger c" onClick={deleteQue}>Delete</button>

@@ -60,7 +60,7 @@ const BaseState = (props) => {
     const textField =  (id)=>{
         var text = document.getElementById(id);
         var question = text.querySelector("textarea");
-        var answer = text.querySelector("div textarea");
+        var answer = text.querySelector("div .answer");
         var props = text.querySelectorAll(".properties div input");
         var data = {
             que : question.value,
@@ -91,11 +91,11 @@ const BaseState = (props) => {
         var score = radio.querySelector("div div .score").value, answer = [], points = [], option = [];
         options.forEach((elem)=>{
             if(elem.querySelector(".form-check-input").checked) {
-                answer.push(1);
+                answer.push(true);
                 points.push(parseInt(score));
             }
             else {
-                answer.push(0);
+                answer.push(false);
                 points.push(0);
             }
             option.push(elem.querySelector(".option").value);
@@ -195,7 +195,7 @@ const BaseState = (props) => {
         var n = child.length;
         for (var i = 3; i < n - 1; i++) {
             var id = child[i].getAttribute("id");
-            
+            if(child[i].style.display == 'none') continue;
             if (child[i].getAttribute("type") === "text") {
                 var data = textField(id);
                 if(data.error) return data;
@@ -309,8 +309,8 @@ const BaseState = (props) => {
 
         showAlert(
             <>
-                <div>Form has been successfully save!</div>
-                <div> Form ID is {resp.fId}</div>
+                <div>Quiz has been successfully save!</div>
+                <div> Quiz ID is {resp.fId}</div>
             </>
         );
         setNewForm([]);

@@ -17,10 +17,8 @@ const getMarks =  async(req)=>{
 
 		for(var i of answers){
 			var queId = i.queId;
-		
 			var userResp = userAns[queId].ans;
-			// console.log(userResp);
-			console.log(userResp, i.ans);
+			console.log(userResp, i);
 			if(userResp.length == 0) {
 				pointArr.push(0);
 				i.wrong++;	
@@ -29,11 +27,12 @@ const getMarks =  async(req)=>{
 
 			var n = i.ans.length;
 			var point = 0;
+			console.log("resposes ",i.ans, userResp);
 			for(var j = 0; j < n; j++){
 				if(i.ans[j] === userResp[j])  {
 					console.log(i.ans[j], userResp[j]);
 					point+=i.points[j];
-				}
+				}else if(i.ans[j] == true && userResp[j] == false);
 				else {
 					// console.log(i.ans[j], userResp[j]);
 					point = 0;
@@ -47,7 +46,7 @@ const getMarks =  async(req)=>{
 				i.right++;
 				if(i.decreasing){
 					var time = Math.max(0,(point - i.minScore));
-					time = ((i.time - userResp[queId].time)/i.time) * time + i.minScore;
+					time = parseFloat(((i.time - userAns[queId].time)/i.time) * time) + parseInt(i.minScore);
 					pointArr.push(time);
 					sum += time;
 				}else{
@@ -63,6 +62,8 @@ const getMarks =  async(req)=>{
 				answer : JSON.stringify(answers)
 			}
 		});
+		var sc = {sum : sum, points : pointArr};
+		console.log(sc);
 		return {sum : sum, points : pointArr};
 	}catch(error){
 		console.log(error);

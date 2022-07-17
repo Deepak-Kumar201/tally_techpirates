@@ -46,7 +46,7 @@ export default function NewQue(props) {
         return <></>;
     } else {
         return (
-            <div className="typeList" onClick={hide} id="select">
+            <div className="typeList" onClick={hide} id="select" style={{top:window.scrollY + "px"}}>
                 <div className="queType" onClick={newText}>
                     Text Type
                 </div>

@@ -28,7 +28,8 @@ export default function CheckBox(props) {
 	}
 
 	const deleteQue = () => {
-		document.getElementById(`cont${queID}`).remove();
+		document.getElementById(`cont${queID}`).childNodes.forEach((elem)=>elem.remove());
+		document.getElementById(`cont${queID}`).style.display="none";
 	}
 /* eslint-disable */
 	useEffect(() => {

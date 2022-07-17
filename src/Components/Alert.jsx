@@ -24,9 +24,9 @@ export default function Alert(props) {
 
     if (context.type === "input") {
         return (
-            <div className="topFix">
+            <div className="topFix" style={{top : window.scrollY + "px"}}>
                 <div className="alertBox">
-                    <input type="text" className="alertBody" id="data" placeholder="Enter Form ID"/>
+                    <input type="text" className="alertBody" id="data" placeholder="Enter Quiz ID"/>
                     <div className="fillAlert cancelAlert" onClick={hideForm}>Cancel</div>
                     <div className="fillAlert" onClick={getForm}>
                         Ok
@@ -37,7 +37,7 @@ export default function Alert(props) {
         );
     } else {
         return (
-            <div className="topFix">
+            <div className="topFix" style={{top : window.scrollY + "px"}}>
                 <div className="alertBox">
                     <div className="alertBody">{context.alertBody}</div>
                     <div className="alertOk" onClick={hideForm}>Ok</div>
