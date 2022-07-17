@@ -64,7 +64,7 @@ export default function QuesStatic({formQue}) {
                                                             { title: 'Wrong', value: elem.wrong, color: 'red' },
                                                         ]}
                                                         style={{width:"200px", fontSize:"10px", color :'white'}}
-                                                        label={({ dataEntry }) => dataEntry.title}
+                                                        // label={({ dataEntry }) => dataEntry.title}
                                                     />
                                                 )
                                             }

@@ -16,7 +16,7 @@ export default function YourForms() {
         <div className='forms-page'>
             <div id="forms-page-header">
                 <div className="forms-page-logo">
-                    <img src={Logo} alt = "Quiz-Shetra logo" className="front-page-quiz-logo"/>
+                    <img src={Logo} alt = "Quiz-Shetra logo" className="forms-page-quiz-logo"/>
                 </div>
                 <div className="forms-page-homeLog">
                     <div className="forms-page-logbtn">

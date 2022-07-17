@@ -34,6 +34,11 @@
     font-family: 'Playfair Display', serif;
     cursor: pointer;
 }
+.forms-page-quiz-logo{
+    height: 70%;
+    padding-left: 40px;
+}
+
 .forms-page-username
 {
     color: #6fcd07;
