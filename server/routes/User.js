@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const User = require("../models/User");
 const resolveJWT = require("../middleware/resolveJWT");
 const bcrypt = require("bcrypt");
+const nodemailer = require('nodemailer');
 
 const isValid = (name) => {
     if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(name)){
@@ -51,7 +52,7 @@ router.post("/signup", async (req, resp) => {
 
 		var jwtTokken = jwt.sign({
 			id: newUser.id
-		}, "hj4h5432j5h$$Fh5i348u98**HU(*YGY$G#JH#)");
+		}, process.env.JWT_SECRET);
         // resp.cookie("token", jwtTokken, {httpOnly:true});
         resp.send({ "token": jwtTokken});
 
@@ -77,7 +78,7 @@ router.post("/signin", async (req, resp) => {
 
 		var jwtTokken = jwt.sign({
 			id: oldData.id
-		}, "hj4h5432j5h$$Fh5i348u98**HU(*YGY$G#JH#)");
+		}, process.env.JWT_SECRET);
 
 		resp.send({ "token": jwtTokken});
 	} catch (err){
@@ -108,6 +109,10 @@ router.put("/updatePassword", resolveJWT, async(req, resp)=>{
 			resp.status(404).send({ "error": "Email not registered" });
 			return;
 		}
+        if(!oldData.otp || oldData.otp != req.body.otp){
+            resp.status(401).send({error:"Incorrect OTP"});
+            return;
+        }
 
         if(await bcrypt.compare(req.body.password, oldData.password) === false){
             resp.status(401).send({"error":"User details invalid"})
@@ -126,5 +131,54 @@ router.put("/updatePassword", resolveJWT, async(req, resp)=>{
 		resp.status(500).send({ "error": "Some server error occured try after some time" });
 	}
 })
+
+
+router.post("/requestOTP", async(req, resp)=>{
+    try {
+        var user = await User.findOne({email:req.body.email})
+        if(!user){
+            resp.status(400).send({error:"Email not registered"});
+            return;
+        }
+        let transport = nodemailer.createTransport({
+            host: "smtp.gmail.com",
+            port: 465,
+            secure: true,
+            auth: {
+              user: process.env.EMAIL_USERNAME,
+              pass: process.env.EMAIL_PASSWORD
+            }
+        });
+
+        var otp = Math.floor(100000 + Math.random() * 900000);
+
+        const mailOptions = {
+            from: 'tallycode40@gmail.com', // Sender address
+            to: req.body.email,
+            subject: 'Otp request for password change', // Subject line
+            text: 'Your requested OTP for password change is ' + otp, 
+        };
+
+        console.log(mailOptions);
+       
+        var x = await transport.sendMail(mailOptions);
+        
+        if(x.error){
+            resp.status(500).send({"error": "Some server error occured try after some time" })
+        }else{
+            await User.findByIdAndUpdate(user.id, {
+                $set:{
+                    otp : otp
+                }
+            })
+            resp.status(200).send({success:"OTP send to mail"});
+        }
+
+    } catch (error) {
+        console.log(error)
+        resp.status(500).send({"error": "Some server error occured try after some time" })
+    }
+})
+
 
 module.exports = router;

@@ -19,6 +19,10 @@ const UserModel = new mongoose.Schema({
         ],
         default : [],
 		ref : 'forms'
+	},
+	otp :{
+		type : Number, 
+		default:0
 	}
 })
 

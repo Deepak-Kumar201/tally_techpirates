@@ -13,6 +13,7 @@ import YourForms from "./Components/YourForms";
 import FillContainer from "./Components/FillingForm/FillContainer";
 import FillState from "./Components/FillingForm/Context/FillState";
 import Form from "./Components/Formdetails/Form";
+import Changepassword from "./Components/Changepassword";
 function App() {
 	const context = useContext(baseContext);
 	/* eslint-disable */
@@ -30,6 +31,9 @@ function App() {
 			<Switch>
 				<Route exact path="/">
 					{context.user._id?<FrontPage />:<HomePage/>}
+				</Route>
+				<Route exact path="/changepass">
+					<Changepassword/>
 				</Route>
 				<Route exact path="/signup">
 					<SignUp />

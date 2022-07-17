@@ -257,9 +257,9 @@ export default function HomePage(props) {
                           required={true}
                         ></input>
                       </div>
-                      <a href="" className="forgot">
+                      <Link to="/changepass" className="forgot">
                         Forgot Password?
-                      </a>
+                      </Link>
 
                       <button
                         className="admin-signin-btn"

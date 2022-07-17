@@ -51,7 +51,7 @@ export default function Header() {
 				</div>
 			</div>
 			<div className="title container" type="title" id="title">
-				<h1>Title of your form</h1><br />
+				<h1>Title of your Quiz</h1><br />
 				<textarea className="form-control" placeholder="Enter Form Title" id="formTitle" rows="1"  onInput={shrinkText} style={{ resize: "none" }}></textarea>
 			</div>
 			<div className="header container" type="description" id="descr">
