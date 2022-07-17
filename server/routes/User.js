@@ -101,9 +101,9 @@ router.post('/auth' , resolveJWT, async (req , res)=>{
     }
 })
 
-router.put("/updatePassword", resolveJWT, async(req, resp)=>{
+router.put("/updatePassword", async(req, resp)=>{
     try {
-		const oldData = await User.findById(req.body.id);
+		const oldData = await User.findOne({email : req.body.email});
 
         if (oldData == null) {
 			resp.status(404).send({ "error": "Email not registered" });
@@ -114,14 +114,12 @@ router.put("/updatePassword", resolveJWT, async(req, resp)=>{
             return;
         }
 
-        if(await bcrypt.compare(req.body.password, oldData.password) === false){
-            resp.status(401).send({"error":"User details invalid"})
-        }
         password = await bcrypt.hash(req.body.newPassword, 10);
 
-        await User.findByIdAndUpdate(req.body.id, {
+        await User.findByIdAndUpdate(oldData.id, {
             $set : {
-                password : password
+                password : password,
+                otp:0
             }
         });
 
@@ -158,8 +156,6 @@ router.post("/requestOTP", async(req, resp)=>{
             subject: 'Otp request for password change', // Subject line
             text: 'Your requested OTP for password change is ' + otp, 
         };
-
-        console.log(mailOptions);
        
         var x = await transport.sendMail(mailOptions);
         
