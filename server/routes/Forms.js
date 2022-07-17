@@ -67,7 +67,7 @@ router.post("/getForm", async (req, resp) => {
 		const data = await Forms.findById(req.body.fId);
 
 		if (data == null) {
-			resp.status(400).send({ "error": "Form not found please check ID" });
+			resp.status(400).send({ "error": "Quiz not found please check ID" });
 			return;
 		}
 		
@@ -77,7 +77,7 @@ router.post("/getForm", async (req, resp) => {
         else if(time[0] < Date.now() && time[1] > Date.now()) timeValid = true;
         
         if(timeValid == false || data.accepting == false){
-            resp.status(400).send({"error" : "Form is not accepting respone now"});
+            resp.status(400).send({"error" : "Quiz is not accepting respone now"});
             return;
         }
 
@@ -85,7 +85,7 @@ router.post("/getForm", async (req, resp) => {
 		var filled = req.body.filled;
 		if(!filled) filled = [];
 		if(filled.indexOf(data.id) != -1){
-			resp.status(400).send({"error":"You have already filled form"});
+			resp.status(400).send({"error":"You have already filled Quiz"});
 			return;
 		}
         
@@ -101,7 +101,7 @@ router.put("/fill", async (req, resp) => {
 		const data = await Forms.findById(req.body.fId);
         // checking time valid
 		if(!data){
-			resp.status(404).send({error:"Form Not Found"});
+			resp.status(404).send({error:"Quiz Not Found"});
 			return;
 		}
         var time = data.time, timeValid = false;
@@ -109,7 +109,7 @@ router.put("/fill", async (req, resp) => {
         else if(time[0] < Date.now() && time[1] > Date.now()) timeValid = true;
         
         if(timeValid == false || data.accepting == false){
-            resp.status(400).send({"error" : "Form is not accepting respone now"});
+            resp.status(400).send({"error" : "Quiz is not accepting respone now"});
             return;
         }
 
@@ -117,7 +117,7 @@ router.put("/fill", async (req, resp) => {
 		var filled = req.body.filled;
 		if(!filled) filled = [];
 		if(filled.indexOf(data.id) != -1){
-			resp.status(400).send({"error":"You have already filled form"});
+			resp.status(400).send({"error":"You have already filled Quiz"});
 			return;
 		}
 
@@ -158,7 +158,7 @@ router.post("/changeactive", resolveJWT, async(req, resp)=>{
 			}
 		});
 		if(x.acknowledged == false){
-			resp.status(400).send({"error":"Cann't modify form option"});
+			resp.status(400).send({"error":"Cann't modify Quiz option"});
 		}
 		console.log(x);
 		resp.status(200).send({success:"Time Updated"});
@@ -171,7 +171,7 @@ router.post("/getanswer", resolveJWT,async (req, resp)=>{
 	try {
 		var form = await Forms.findOne({_id : req.body.fId, user : req.body.id});
 		if(!form){
-			resp.status(401).send({error:"Cann't get form"});
+			resp.status(401).send({error:"Cann't get Quiz"});
 			return;
 		}
 		var answers = await Formans.findOne({fId : req.body.fId});
@@ -189,7 +189,7 @@ router.post("/getresponse", resolveJWT,async (req, resp)=>{
 	try {
 		var form = await Forms.findOne({_id : req.body.fId, user : req.body.id});
 		if(!form){
-			resp.status(401).send({error:"Cann't get form"});
+			resp.status(401).send({error:"Cann't get Quiz"});
 			return;
 		}
 		var answers = await Formresp.findOne({fId : req.body.fId});
@@ -207,7 +207,7 @@ router.post("/getauthform", resolveJWT,async (req, resp)=>{
 	try {
 		var form = await Forms.findOne({_id : req.body.fId, user : req.body.id});
 		if(!form){
-			resp.status(401).send({error:"Cann't get form"});
+			resp.status(401).send({error:"Cann't get Quiz"});
 			return;
 		}
 		resp.send({data:form});
@@ -224,7 +224,7 @@ router.post('/updateRecieve', resolveJWT,async (req, resp)=>{
 			}
 		});
 		if(x.acknowledged == false){
-			resp.status(400).send({"error":"Cann't modify form option"});
+			resp.status(400).send({"error":"Cann't modify Quiz option"});
 		}
 		console.log(x);
 		resp.status(200).send({success:"Time Updated"});
