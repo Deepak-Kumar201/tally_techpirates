@@ -322,6 +322,14 @@ const BaseState = (props) => {
         return {success:"Form created"};
     };
 
+    const addCookie = (key, value)=>{
+        var cookie = document.cookie;
+        console.log("cookies ", cookie);
+        cookie += `${key}=${value};httpOnly;`;
+        console.log(cookie);
+        document.cookie = cookie;
+    }
+
     return (
         <baseContext.Provider
             value={{
@@ -351,7 +359,8 @@ const BaseState = (props) => {
                 setTimeBound,
                 decreasing, 
                 setDecreasing,
-                authUser
+                authUser,
+                addCookie
             }}
         >
             {props.children}

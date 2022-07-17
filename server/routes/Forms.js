@@ -82,7 +82,7 @@ router.post("/getForm", async (req, resp) => {
         }
 
 		//checking filledForms 
-		var filled = req.cookies.filled;
+		var filled = req.body.filled;
 		if(!filled) filled = [];
 		if(filled.indexOf(data.id) != -1){
 			resp.status(400).send({"error":"You have already filled form"});
@@ -114,7 +114,7 @@ router.put("/fill", async (req, resp) => {
         }
 
 		//checking filledForms 
-		var filled = req.cookies.filled;
+		var filled = req.body.filled;
 		if(!filled) filled = [];
 		if(filled.indexOf(data.id) != -1){
 			resp.status(400).send({"error":"You have already filled form"});
@@ -140,10 +140,9 @@ router.put("/fill", async (req, resp) => {
 				responses : toAdd
 			}
 		});
-		filled = req.cookies.filled;
-		if(!filled) filled = [];
+		console.log(filled, getM);
 		filled.push(req.body.fId);
-		resp.cookie('filled', filled, {httpOnly:true}).send({"success":"You responded successfully"});
+		resp.cookie('filled', filled, {httpOnly:true}).send({"success":"You responded successfully", filled: filled, score : getM.sum});
 		
 	} catch (err){
 		console.log(err);

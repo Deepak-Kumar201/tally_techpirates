@@ -60,7 +60,7 @@ export default function Card({data}) {
                             <h4 className='time-head'>Start Date and Time</h4>
                             <p><time>
                                 {
-                                    data.time[0] == -1? "Accepting Forever":(new Date(data.time[0]))
+                                    data.time[0] == -1? "Accepting Forever":(new Date(data.time[0]).toDateString()+", "+new Date(data.time[0]).toLocaleTimeString())
                                 }
                                 </time></p>
                         </div> 
@@ -68,7 +68,7 @@ export default function Card({data}) {
                             <h4 className='time-head'>End Date and Time</h4>
                             <p><time>
                                 {
-                                    data.time[0] == -1? "Accepting Forever":(new Date(data.time[1]))
+                                    data.time[0] == -1? "Accepting Forever":(new Date(data.time[1]).toDateString()+", "+new Date(data.time[1]).toLocaleTimeString())
                                 }
                                 </time></p>
                         </div> 

@@ -23,7 +23,8 @@ const FillState = (props) => {
     const getForm = async (id)=>{
         var uri = "http://localhost:5000/api/forms/getForm";
         var data = {
-            fId : id
+            fId : id,
+            filled : localStorage.getItem("filled")
         }
         setfId(id);
 
@@ -46,7 +47,8 @@ const FillState = (props) => {
         data = resp.data;
         settitle(resp.title);
         setdesc(resp.description);
-        var x = window.prompt("Enter your Name");
+        var x = context.user.name;
+        if(!x)x = "";
         while(x.trim().length == 0){
             x = window.prompt("Enter your Name");
         }
@@ -152,7 +154,8 @@ const FillState = (props) => {
         var data = {
             name : name,
             answer : filled,
-            fId : fId
+            fId : fId,
+            filled : localStorage.getItem("filled")
         }
 
         var resp = await fetch(uri, {
@@ -172,8 +175,8 @@ const FillState = (props) => {
             history.push('/')
             return;
         }
-
-        context.showAlert("Form Submitted Successfully");
+        localStorage.setItem("filled", resp.filled);
+        context.showAlert("Form Submitted Successfully and your score is "+resp.score);
         history.push("/");
     }
 

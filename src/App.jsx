@@ -22,6 +22,7 @@ function App() {
 	}
 	useEffect(()=>{
 		if(localStorage.getItem('token'))context.authUser();
+		context.addCookie("name2","deepak");
 	}, [])
 
 	return (

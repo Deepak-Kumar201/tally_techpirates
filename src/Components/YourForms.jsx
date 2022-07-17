@@ -33,7 +33,7 @@ export default function YourForms() {
             <div className='allForms'>
                 {
                     context.user.forms.map((elem, ind)=>{
-                        return <Card data={elem} key={ind}/>
+                        return <Card data={elem} key={elem._id}/>
                     })
                 }
             </div>

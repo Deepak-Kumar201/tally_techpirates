@@ -97,7 +97,7 @@ export default function LeftFill() {
         <div>
             <div className="questionHeading">
                 {
-                    context.curQueTimer > 0 ?<div className="filltimer">{context.curQueTimer}</div>:<></>
+                    context.curQueTimer > 0 ?<div className="filltimer" style={{color:context.curQueTimer<=10?"white":"black", backgroundColor:context.curQueTimer<=10?"red":"smokewhite"}}>{context.curQueTimer}</div>:<></>
                 }
                 <div style={{color:"white"}}>Que No {context.curQue + 1}</div>
             </div>
