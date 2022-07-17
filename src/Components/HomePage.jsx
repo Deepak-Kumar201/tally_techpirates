@@ -261,19 +261,19 @@ export default function HomePage(props) {
                         Forgot Password?
                       </Link>
 
-                      <button
-                        className="admin-signin-btn"
+                      <div
+                        className="admin-signin-b"
                         onClick={signin}
                         type="submit"
                         style = {{width: "90%"}}
                       >
                         Sign In
-                      </button>
+                      </div>
                     </form>
 
                     <div className="signin-div">
                       <button
-                        className=" signin-option"
+                        className="signin-option"
                         id="signin-google"
                         onClick={signinwithGoogle}
                         style = {{width: "90%"}}

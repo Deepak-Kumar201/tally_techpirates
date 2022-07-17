@@ -38,7 +38,50 @@ export default function Changepassword() {
         setactive(false);
     }
 
-    const changepass = ()=>{
+    const changepass = async(e)=>{
+        e.preventDefault();
+        var email = document.getElementById("changeemail").value.trim();
+        var pass = document.getElementById("changepass").value.trim();
+        var cpass = document.getElementById("changecpass").value.trim();
+        var otp = document.getElementById("changeotp").value.trim();
+        if(otp.length != 6){
+            context.showAlert("Enter valid OTP");
+            return
+        }
+        if(pass.length < 8){
+            context.showAlert("Enter valid password");
+        }
+        if(pass != cpass){
+            context.showAlert("Password and Confirm Password doesn't match");
+            return;
+        }
+
+        var data = {
+            email : email,
+            newPassword : cpass,
+            otp : otp
+        };
+
+        console.log(data);
+        context.startLoader();
+        const url = "http://localhost:5000/api/user/updatePassword";
+        var resp = await fetch(url, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        });
+
+        resp = await resp.json();
+        context.stopLoader();
+        if(resp.error){
+            context.showAlert(resp.error);
+            return
+        }else{
+            context.showAlert(resp.success);
+            history.push("/");
+        }
 
     }
 
@@ -49,13 +92,13 @@ export default function Changepassword() {
     return (
         <div>
             <form>
-                Email : <input type="email" id='changeemail' required/> <button className='btn btn-primary' onClick={reqOTP} type="submit">Send OTP</button>
+                <input type="email" id='changeemail' required placeholder='Email Address'/> <button className='btn btn-primary' onClick={reqOTP} type="submit">Send OTP</button>
             </form>
             <form>
                 <input type="number" id="changeotp" className = "changePass changePassotp" placeholder='Enter OTP' disabled={active}/>
                 <input type="password" id="changepass" className = "changePass changePasspass" placeholder='Enter Password' disabled={active}/>
                 <input type="password" id="changecpass" placeholder='Confirm Password' disabled={active} className = "changePass changePassconfpass"/>
-                <input type="submit" value="Change Password" disabled={active} className = "changePass changePassbtn"/>
+                <input type="submit" value="Change Password" disabled={active} className = "changePass changePassbtn" onClick={changepass}/>
             </form>
         </div>
     )

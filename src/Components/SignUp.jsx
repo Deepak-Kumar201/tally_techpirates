@@ -175,10 +175,10 @@ export default function SignUp() {
                     id = "CONFPASS"
                     ></input>
                     </div>
-                    <button className="admin-signup-btn" onClick={SubmitData}>Sign Up</button> 
+                    <button className="admin-signin-b" onClick={SubmitData} style={{width:"90%"}}>Sign Up</button> 
                 </form>
                 <div className="signup-div">
-                    <button className=" signup-option" id="signup-google" onClick={signupwithGoogle}>
+                    <button className=" signup-option" id="signup-google" onClick={signupwithGoogle} style={{width:"90%"}}>
                         Sign Up with{" "}
                         <img src={GoogleImg} type="icon" alt="Google Icon" />
                       </button>

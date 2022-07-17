@@ -282,5 +282,18 @@
 
 }
 
+.admin-signin-b{
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 0px;
+    padding: 8px 20px;
+    border-radius: 20px;
+    border: none;
+    transition: all 0.5s;
+    background-color: #6fcd07;
+    color: #fff;
+    font-size: 20px;
+}
+
 
 /* Login Page */
