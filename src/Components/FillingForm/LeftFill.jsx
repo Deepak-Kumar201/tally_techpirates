@@ -6,7 +6,7 @@ export default function LeftFill() {
     const [data, setData] = useState(<></>);
 
     const getText = (que)=>{
-        return <textarea style={{width:"90%",height:"50vh", padding:"20px",resize:"none",border:"none",borderRadius:"10px"}} onChange={(e)=>{context.setNewAns([e.target.value])}} placeholder="Write Your Answer" defaultValue={context.ans[que.ind]==null?"":context.ans[que.ind][0]} key={que.id}></textarea>
+        return <textarea style={{width:"50%",height:"30vh", padding:"20px",resize:"none",border:"none",borderRadius:"10px"}} onChange={(e)=>{context.setNewAns([e.target.value])}} placeholder="Write Your Answer" defaultValue={context.ans[que.ind]==null?"":context.ans[que.ind][0]} key={que.id}></textarea>
     }
 
     const updateCheckAns = (id)=>{
@@ -95,18 +95,21 @@ export default function LeftFill() {
 
     return (
         <div>
+            <div className="question-complete">
             <div className="questionHeading">
                 {
                     context.curQueTimer > 0 ?<div className="filltimer" style={{color:context.curQueTimer<=10?"white":"black", backgroundColor:context.curQueTimer<=10?"red":"smokewhite"}}>{context.curQueTimer}</div>:<></>
                 }
-                <div style={{color:"white"}}>Que No {context.curQue + 1}</div>
+                <div className="fillscore" style={{textAlign:"right", paddingRight: "30px"}}>Marks - {context.dispQue.score}</div>
+                {/* <div style={{color:"#6fcd07"}}>Que No {context.curQue + 1}</div> */}
             </div>
             <div className="questionStatement">
-                <div>{context.dispQue.que}</div>
-                <div className="fillscore" style={{textAlign:"right"}}>Marks - {context.dispQue.score}</div>
+                <div style={{fontSize: "19px"}}>{'Ques No. ' + context.curQue + 1 + '   :    '+ context.dispQue.que}</div>
+                {/* <div className="fillscore" style={{textAlign:"right"}}>Marks - {context.dispQue.score}</div> */}
                 <div className="fillquesans">
                     {data}
                 </div>
+            </div>
             </div>
             <button className="fillnextbtn" onClick={(e)=>{e.preventDefault(); context.getNextQue()}}>Submit and Next</button>
         </div>

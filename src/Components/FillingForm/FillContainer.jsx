@@ -20,6 +20,13 @@ export default function FillContainer() {
                 <LeftFill/>
             </div>
             <div className='fillright'>
+                <div className='fillright-desc'>
+                    <div className='color-desc'><div className='lightgreen color-span' style = {{backgroundColor: "lightgreen"}}></div><div>Current Unsubmitted Question </div></div>
+                    <div className='color-desc'><div className='dark-green color-span' style = {{backgroundColor: "#1ab552"}}></div> <div>Not Submitted</div></div>
+                    <div className='color-desc'><div className='blue color-span' style = {{backgroundColor: "blue"}}></div>Submitted</div>
+                    <div className='color-desc'><div className='purple color-span' style = {{backgroundColor: "purple"}}></div>Current Submitted Question</div>
+                    <div className='color-desc'><div className='lightgray color-span' style = {{backgroundColor: "gray"}}></div>Submitted but not answered</div>
+                </div>
                 <div className="questionCont">
                     {
                         context.queArr.map((elem, ind)=>{
@@ -27,7 +34,7 @@ export default function FillContainer() {
                         })
                     }
                 </div>
-                <div className='submittest' onClick={()=>{context.setCurQue(0);context.submit();}}>Sumbit Test</div>
+                <div className='submittest' onClick={()=>{context.setCurQue(0);context.submit();}}>Submit Test</div>
             </div>
 
         </div>

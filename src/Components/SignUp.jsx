@@ -125,7 +125,7 @@ export default function SignUp() {
     
     return (
         <div className="signup-full">
-            <h1 className="main-head"> Welcome to Forms</h1>
+            <h1 className="main-head"> Welcome to Quiz-Shetra</h1>
             <div className="signup">
             <div className="admin-signup">
             
