@@ -14,19 +14,22 @@ import FillContainer from "./Components/FillingForm/FillContainer";
 import FillState from "./Components/FillingForm/Context/FillState";
 import Form from "./Components/Formdetails/Form";
 import Changepassword from "./Components/Changepassword";
+import Formerror from "./Components/FillingForm/Formerror";
+import audio from "./Audio/tick.mp3"
 function App() {
 	const context = useContext(baseContext);
 	/* eslint-disable */
 	window.onload = () => {
 		context.stopLoader();
 	}
+
 	useEffect(()=>{
-		if(localStorage.getItem('token'))context.authUser();
-		context.addCookie("name2","deepak");
+		context.authUser();
 	}, [])
 
 	return (
 		<Router>
+			<audio src={audio} id="ticksound"/>
 			<Alert />
 			<Loader />
 			<Switch>
@@ -52,6 +55,9 @@ function App() {
 				</Route>
 				<Route exact path="/details">
 					<Form />
+				</Route>
+				<Route exact path="/status">
+					<Formerror/>
 				</Route>
 			</Switch>
 			{/* <FrontPage /> */}
