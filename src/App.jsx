@@ -23,8 +23,21 @@ function App() {
 		context.stopLoader();
 	}
 
+	window.onbeforeunload = ()=>{
+		var filling = localStorage.getItem("filling");
+		var filled = localStorage.getItem("filled");
+		if(!filling) return;
+		
+		if(!filled) filled = [];
+		else filled = JSON.parse(filled);
+		console.log("object");
+		filled.push(filling);
+		localStorage.setItem("filled",JSON.stringify(filled));
+		localStorage.removeItem("filling");
+	}
+
 	useEffect(()=>{
-		context.authUser();
+		if(localStorage.getItem('token'))context.authUser();
 	}, [])
 
 	return (

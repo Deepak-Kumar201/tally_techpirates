@@ -20,6 +20,25 @@ const FillState = (props) => {
     const context = useContext(baseContext);
     const history = useHistory();
 
+    function shuffle(array) {
+        let currentIndex = array.length,  randomIndex;
+      
+        // While there remain elements to shuffle.
+        while (currentIndex != 0) {
+      
+          // Pick a remaining element.
+          randomIndex = Math.floor(Math.random() * currentIndex);
+          currentIndex--;
+      
+          // And swap it with the current element.
+          [array[currentIndex], array[randomIndex]] = [
+            array[randomIndex], array[currentIndex]];
+        }
+      
+        return array;
+      }
+
+
     const getForm = async (id)=>{
         var uri = "http://localhost:5000/api/forms/getForm";
         var data = {
@@ -54,7 +73,7 @@ const FillState = (props) => {
         }
 
         setname(x.trim());
-        
+        localStorage.setItem("filling", resp._id);
         const que = JSON.parse(JSON.parse(data));
         var arr = [];
         for(var i in que){
@@ -66,11 +85,7 @@ const FillState = (props) => {
 
         console.log(resp);
 
-        if(resp.shuffle){
-            console.log("suffle");
-        }else{
-            console.log("don't suffle");
-        }
+        if(resp.shuffle) arr = shuffle(arr)
 
         var clr = [], a = [];
         for(var i = 0; i < arr.length; i++){

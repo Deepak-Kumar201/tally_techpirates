@@ -107,7 +107,7 @@ export default function LeftFill() {
                 {/* <div style={{color:"#6fcd07"}}>Que No {context.curQue + 1}</div> */}
             </div>
             <div className="questionStatement">
-                <div style={{fontSize: "19px"}}>{'Ques No. ' + context.curQue + 1 + '   :    '+ context.dispQue.que}</div>
+                <div style={{fontSize: "19px"}}>{'Ques No. ' + (parseInt(context.curQue) + 1) + '   :    '+ context.dispQue.que}</div>
                 {/* <div className="fillscore" style={{textAlign:"right"}}>Marks - {context.dispQue.score}</div> */}
                 <div className="fillquesans">
                     {data}
