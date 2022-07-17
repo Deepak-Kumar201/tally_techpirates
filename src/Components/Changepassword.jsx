@@ -46,10 +46,11 @@ export default function Changepassword() {
         var otp = document.getElementById("changeotp").value.trim();
         if(otp.length != 6){
             context.showAlert("Enter valid OTP");
-            return
+            return;
         }
         if(pass.length < 8){
             context.showAlert("Enter valid password");
+            return ;
         }
         if(pass != cpass){
             context.showAlert("Password and Confirm Password doesn't match");
@@ -90,16 +91,19 @@ export default function Changepassword() {
     }, [context.user])
 
     return (
-        <div>
-            <form>
-                <input type="email" id='changeemail' required placeholder='Email Address'/> <button className='btn btn-primary' onClick={reqOTP} type="submit">Send OTP</button>
+        <div className='changePass-full'>
+            <div className='changePass-inside'>
+            <h2> Forgot Password? </h2>
+            <form className='changePass-upper'>
+                <input type="email" id='changeemail' required placeholder = "Enter the Email ID"/> <button className='btn btn-primary changePass-sendbtn' onClick={reqOTP} type="submit">Send OTP</button>
             </form>
-            <form>
+            <form className='changePass-lower'>
                 <input type="number" id="changeotp" className = "changePass changePassotp" placeholder='Enter OTP' disabled={active}/>
                 <input type="password" id="changepass" className = "changePass changePasspass" placeholder='Enter Password' disabled={active}/>
                 <input type="password" id="changecpass" placeholder='Confirm Password' disabled={active} className = "changePass changePassconfpass"/>
-                <input type="submit" value="Change Password" disabled={active} className = "changePass changePassbtn" onClick={changepass}/>
+                <input type="submit" value="Change Password" disabled={active} className = "changePassbtn" onClick={changepass}/>
             </form>
+            </div>
         </div>
     )
 }
