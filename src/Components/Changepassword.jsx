@@ -49,13 +49,13 @@ export default function Changepassword() {
     return (
         <div>
             <form>
-                <input type="email" id='changeemail' required/> <button className='btn btn-primary' onClick={reqOTP} type="submit">Send OTP</button>
+                Email : <input type="email" id='changeemail' required/> <button className='btn btn-primary' onClick={reqOTP} type="submit">Send OTP</button>
             </form>
             <form>
-                <input type="number" id="changeotp" placeholder='Enter OTP' disabled={active}/>
-                <input type="password" id="changepass" placeholder='Enter Password' disabled={active}/>
-                <input type="password" id="changecpass" placeholder='Confirm Password' disabled={active}/>
-                <input type="submit" value="Change Password" disabled={active}/>
+                <input type="number" id="changeotp" className = "changePass changePassotp" placeholder='Enter OTP' disabled={active}/>
+                <input type="password" id="changepass" className = "changePass changePasspass" placeholder='Enter Password' disabled={active}/>
+                <input type="password" id="changecpass" placeholder='Confirm Password' disabled={active} className = "changePass changePassconfpass"/>
+                <input type="submit" value="Change Password" disabled={active} className = "changePass changePassbtn"/>
             </form>
         </div>
     )
