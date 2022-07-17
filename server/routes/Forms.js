@@ -84,6 +84,8 @@ router.post("/getForm", async (req, resp) => {
 		//checking filledForms 
 		var filled = req.body.filled;
 		if(!filled) filled = [];
+		else filled = JSON.parse(filled)
+		console.log(filled);
 		if(filled.indexOf(data.id) != -1){
 			resp.status(400).send({"error":"You have already filled Quiz"});
 			return;
@@ -116,6 +118,7 @@ router.put("/fill", async (req, resp) => {
 		//checking filledForms 
 		var filled = req.body.filled;
 		if(!filled) filled = [];
+		else filled = JSON.parse(filled)
 		if(filled.indexOf(data.id) != -1){
 			resp.status(400).send({"error":"You have already filled Quiz"});
 			return;

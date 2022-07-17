@@ -40,8 +40,8 @@ const FillState = (props) => {
         resp = await resp.json();
         context.stopLoader();
         if(resp.error){
-            context.showAlert(resp.error);
-            history.push('/')
+            var m = resp.error;
+            history.push('/status?m='+m)
             return;
         }
         data = resp.data;
@@ -171,13 +171,13 @@ const FillState = (props) => {
         context.stopLoader();
 
         if(resp.error){
-            context.showAlert(resp.error);
-            history.push('/')
+            var m = resp.error;
+            history.push('/status?m='+m)
             return;
         }
-        localStorage.setItem("filled", resp.filled);
-        context.showAlert("Form Submitted Successfully and your score is "+resp.score);
-        history.push("/");
+        localStorage.setItem("filled", JSON.stringify(resp.filled));
+        var m = "Form Submitted Successfully and your score is "+resp.score;
+        history.push("/status?m="+m);
     }
 
 
