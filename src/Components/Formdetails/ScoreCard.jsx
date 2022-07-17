@@ -39,6 +39,7 @@ export default function ScoreCard() {
         }
         getForm();
     }, [])
+    var rank = 1;
     return (
         <div className='scorecardCont'>
             <div>
@@ -52,7 +53,7 @@ export default function ScoreCard() {
                             <div className='scorecard'>
                                 <div className='scorecard-left'>
                                     <div className='scorecard-name'>
-                                        <h4>{data.name}</h4>
+                                        <h4>{(rank++) + ' .  ' + data.name}</h4>
                                     </div>
                                 </div>
                                 <div className='scorecard-right'>
