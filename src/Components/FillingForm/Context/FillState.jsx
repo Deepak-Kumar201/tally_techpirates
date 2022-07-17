@@ -63,6 +63,15 @@ const FillState = (props) => {
             temp.ind = arr.length
             arr.push(temp);
         }
+
+        console.log(resp);
+
+        if(resp.shuffle){
+            console.log("suffle");
+        }else{
+            console.log("don't suffle");
+        }
+
         var clr = [], a = [];
         for(var i = 0; i < arr.length; i++){
             clr.push("rgb(0, 177, 18)");

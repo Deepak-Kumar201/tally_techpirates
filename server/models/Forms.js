@@ -28,6 +28,10 @@ const FormModel = new mongoose.Schema({
 	accepting:{
 		type:Boolean,
 		default : true
+	},
+	shuffle :{
+		type : Boolean,
+		default : false
 	}
 })
 

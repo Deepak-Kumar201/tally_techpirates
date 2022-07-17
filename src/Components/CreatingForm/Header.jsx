@@ -38,16 +38,17 @@ export default function Header() {
 				</div>
 
 				<div className="formSetting">
+					<div><input type="checkbox" name="suffleques" id="suffleques" className="form-check-input"/><label htmlFor="suffleques">Suffle Questions</label></div>
 					<div><input type="checkbox" name="timeBound" id="timeBound" checked={timeBound} onChange={(e)=>{setTimeBound(e.target.checked)}} className="form-check-input"/><label htmlFor="timeBound">Are Question Time Bound</label></div>
+					<div>
 					{
 						timeBound == true?(
-							<div>
-								<input type="checkbox" id="decreasing" name="decreasing" checked={decreasing} onChange={(e)=>{setDecreasing(e.target.checked)}} className="form-check-input"/> <label htmlFor="decreasing">Decreasing Score</label>
-							</div>
-						):(
-							<></>
-						)
-					}
+								<><input type="checkbox" id="decreasing" name="decreasing" checked={decreasing} onChange={(e)=>{setDecreasing(e.target.checked)}} className="form-check-input"/> <label htmlFor="decreasing">Decreasing Score</label></>
+								):(
+									<></>
+									)
+								}
+					</div>
 				</div>
 			</div>
 			<div className="title container" type="title" id="title">

@@ -32,6 +32,7 @@ router.post('/create', resolveJWT, async (req, resp) => {
 		}
         if(req.body.time) data.time = req.body.time;
         if(req.body.timeToAttempt) data.timeToAttempt = req.body.timeToAttempt;
+		if(req.body.shuffle) data.shuffle = req.body.shuffle;
         var newForm = new Forms(data);
         await newForm.save();
 

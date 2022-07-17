@@ -89,7 +89,7 @@ export default function LeftFill() {
             var timer = document.querySelector(".filltimer");
             if(!timer)return;
             timer = parseInt(timer.innerHTML);
-            if(timer <= 10){
+            if(timer <= 11){
                 document.getElementById("ticksound").play();
             }
             context.setCurQueTimer(timer - 1);

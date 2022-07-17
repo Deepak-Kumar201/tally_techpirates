@@ -63,20 +63,39 @@ const BaseState = (props) => {
         var answer = text.querySelector("div .answer");
         var props = text.querySelectorAll(".properties div input");
         var data = {
-            que : question.value,
-            ans : [answer.value]
+            que : question.value.trim(),
+            ans : [answer.value.trim()]
         }
         if(data.que.length == 0){
             return {error:"Question is empty"};
+        }
+        console.log(data);
+        if(data.ans[0].length == 0){
+            return {error:"Answer is empty"};
         }
         props.forEach((elem, ind)=>{
             if(ind == 0) {
                 data.points = [parseInt(elem.value)];
                 data.score = [parseInt(elem.value)];
             }
-            else if(ind == 1)data.time = elem.value;
+            else if(ind == 1){
+                data.time = parseInt(elem.value);
+                console.log(data.time)
+            }
             else data.minScore = elem.value;
         })
+        
+        if(data.time == 0){
+            return {error : "Question cann't have 0 time"};
+        }
+        var allAllZero = true;
+        for(var i of data.points){
+            if(i != 0) allAllZero = false;
+        }
+        if(allAllZero){
+            return {error : "Question cann't have zero points"}
+        }
+
         console.log(data);
         return data;
     }
@@ -113,9 +132,34 @@ const BaseState = (props) => {
         var props  = radio.querySelectorAll(".properties div input");
         props.forEach((elem, ind)=>{
             if(ind == 0);
-            else if(ind == 1)data.time = elem.value;
+            else if(ind == 1){
+                data.time = elem.value;
+            }
             else data.minScore = elem.value;
         })
+        if(data.time == 0) return {error : "Question cann't have zero time"};
+        if(option.length == 0){
+            return {error: "Question should have at least 1 option"};
+        }
+        if(data.score == 0){
+            return {error : "Question Cann't have zero score"};
+        }
+
+        var alloption = false;
+        for(var i of option){
+            if(i.length == 0) alloption = true;
+        }
+        if(alloption) {
+            return {error:"Option Cann't be empty"};
+        }
+
+        var ans = true;
+        for(var i of data.ans){
+            if(i) ans = false;
+        }
+        if(ans){
+            return {error : "Question should have answer marked"};
+        }
         console.log(data);
         return data;
     }
@@ -132,9 +176,6 @@ const BaseState = (props) => {
             var childs = elem.childNodes;
             ans.push(childs[0].checked);
             option.push(childs[1].value);
-            if(childs[1].value.length == 0){
-                return {error : "empty option"};
-            }
             var sc = parseInt(childs[2].value);
             if(childs[2].value.length == 0) sc = 0;
             points.push(sc);
@@ -147,11 +188,39 @@ const BaseState = (props) => {
             points : points,
             score : score
         }
+        if(option.length == 0){
+            return {error: "Question should have at least 1 option"};
+        }
+        if(score == 0){
+            return {error : "Question Cann't have zero score"};
+        }
+        console.log("soce", score);
+        var ansOpt = true;
+        for(var i of ans){
+            if(i) ansOpt = false;
+        }
+        if(ansOpt){
+            return {error : "Question should have answer marked"};
+        }
+
+        var alloption = false;
+        for(var i of option){
+            if(i.length == 0) alloption = true;
+        }
+
+        if(alloption) {
+            return {error:"Option Cann't be empty"};
+        }
+
+
         var props  = check.querySelectorAll(".properties div input");
         props.forEach((elem, ind)=>{
-            if(ind == 0)data.time = elem.value;
+            if(ind == 0){
+                data.time = elem.value;
+            }
             else data.minScore = elem.value;
         })
+        if(data.time == 0) return {error : "Question cann't have zero time"};
         console.log(data);
         return data;
         
@@ -181,7 +250,7 @@ const BaseState = (props) => {
             }
             time[0] = st.getTime(); time[1] = ed.getTime();
         }
-
+        var shuffle = document.getElementById("suffleques").checked;
         var timeBound = false, decreasing = false;
 
         if(document.getElementById("timeBound").checked){
@@ -283,6 +352,7 @@ const BaseState = (props) => {
             data: form,
             answer : ans,
             time : time,
+            shuffle:shuffle,
             token : localStorage.getItem('token')
         };
         console.log(data);
