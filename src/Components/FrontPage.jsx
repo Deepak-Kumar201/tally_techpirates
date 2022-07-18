@@ -24,7 +24,7 @@ export default function FrontPage() {
     };
 
     const logout = ()=>{
-        localStorage.clear('token');
+        localStorage.removeItem('token');
         history.push("/")
         window.location.reload();
     }

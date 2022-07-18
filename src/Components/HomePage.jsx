@@ -209,7 +209,7 @@ export default function HomePage(props) {
                     color: type != "admin" ? "white" : "black",
                   }}
                 >
-                  Participants
+                  Participant
                 </button>
               </div>
               <div className="signin-admin-main">

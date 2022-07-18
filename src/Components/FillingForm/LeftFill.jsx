@@ -6,7 +6,7 @@ export default function LeftFill() {
     const [data, setData] = useState(<></>);
 
     const getText = (que)=>{
-        return <textarea style={{width:"50%",height:"30vh", padding:"20px",resize:"none",border:"none",borderRadius:"10px"}} onChange={(e)=>{context.setNewAns([e.target.value])}} placeholder="Write Your Answer" defaultValue={context.ans[que.ind]==null?"":context.ans[que.ind][0]} key={que.id}></textarea>
+        return <textarea style={{width:"50%",height:"30vh", padding:"20px",resize:"none",border:"none",borderRadius:"10px"}} onChange={(e)=>{context.setNewAns([e.target.value.toLowerCase()])}} placeholder="Write Your Answer" defaultValue={context.ans[que.ind]==null?"":context.ans[que.ind][0]} key={que.id}></textarea>
     }
 
     const updateCheckAns = (id)=>{

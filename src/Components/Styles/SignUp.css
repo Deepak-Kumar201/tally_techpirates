@@ -137,3 +137,20 @@
     color: #6fcd07;
     text-decoration: none;
 }
+
+@media only screen and (max-width: 768px) {
+    .signup{
+        width: 60%;
+    }
+}
+@media only screen and (max-width: 600px) {
+    .signup{
+        width: 80%;
+    }
+}
+@media only screen and (max-width: 600px) {
+    .main-head{
+        font-size: 30px;
+        margin-top: 40px;
+    }
+}

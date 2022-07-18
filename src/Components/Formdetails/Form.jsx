@@ -16,7 +16,7 @@ export default function Form() {
     const context = useContext(baseContext);
 
     const logout = ()=>{
-        localStorage.clear('token');
+        localStorage.removeItem('token');
         history.push("/")
         window.location.reload();
     }

@@ -64,8 +64,10 @@ const BaseState = (props) => {
         var props = text.querySelectorAll(".properties div input");
         var data = {
             que : question.value.trim(),
-            ans : [answer.value.trim()]
+            ans : [answer.value.trim().toLowerCase()]
         }
+        var a = "";
+
         if(data.que.length == 0){
             return {error:"Question is empty"};
         }
@@ -134,9 +136,9 @@ const BaseState = (props) => {
         props.forEach((elem, ind)=>{
             if(ind == 0);
             else if(ind == 1){
-                data.time = elem.value;
+                data.time = parseInt(elem.value);
             }
-            else data.minScore = elem.value;
+            else data.minScore = parseInt(elem.value);
         })
         if(data.time && data.time <= 0) return {error : "Time must be greater than 0"};
         if(option.length == 0){
@@ -225,15 +227,15 @@ const BaseState = (props) => {
         var props  = check.querySelectorAll(".properties div input");
         props.forEach((elem, ind)=>{
             if(ind == 0){
-                data.time = elem.value;
+                data.time = parseInt(elem.value);
             }
-            else data.minScore = elem.value;
+            else data.minScore = parseInt(elem.value);
         })
         if(data.minScore && (data.score < data.minScore || data.minScore <= 0)){
             return {error : "Min score mush be smaller than score and positive"};
         }
         if(data.time && data.time <= 0) return {error : "Time must be greater than 0"};
-        // console.log(data);
+        console.log(data);
         return data;
         
     }

@@ -11,7 +11,6 @@ const isValid = (name) => {
         return (true)
     }
     return (false)
-  
 }
 
 router.post("/signup", async (req, resp) => {

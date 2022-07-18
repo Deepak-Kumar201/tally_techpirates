@@ -8,7 +8,7 @@ import Logo from '../Images/logo.png';
 export default function YourForms() {
     const history = useHistory();
     const logout = ()=>{
-        localStorage.clear('token');
+        localStorage.removeItem('token');
         history.push("/")
         window.location.reload();
     }
