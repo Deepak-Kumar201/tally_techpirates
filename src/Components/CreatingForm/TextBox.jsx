@@ -10,7 +10,7 @@ export default function TextBox(props) {
 			document.getElementById(`cont${queID}`).childNodes.forEach((elem)=>elem.remove());
 			document.getElementById(`cont${queID}`).style.display="none";
 		}catch(err){
-			console.log(err);
+			// console.log(err);
 		}
 	}
 

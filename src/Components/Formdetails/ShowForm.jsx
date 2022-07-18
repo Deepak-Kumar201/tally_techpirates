@@ -16,7 +16,7 @@ export default function ShowForm({form, formQue}) {
     }
 
     useEffect(()=>{
-        console.log("from form ", form);
+        // console.log("from form ", form);
     },[form])
 
     return (

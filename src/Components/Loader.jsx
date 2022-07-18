@@ -5,7 +5,7 @@ export default function Loader(){
     })
     return(
         <div className="loader">
-            <div class="ring">
+            <div className="ring">
                 Loading
                 <span></span>
             </div>

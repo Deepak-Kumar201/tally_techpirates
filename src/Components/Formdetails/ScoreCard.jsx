@@ -26,7 +26,7 @@ export default function ScoreCard() {
             });
     
             resp = await resp.json();
-            console.log("resp data-> ", resp.data);
+            // console.log("resp data-> ", resp.data);
             context.stopLoader();
             if(resp.error){
                 context.showAlert(resp.error);

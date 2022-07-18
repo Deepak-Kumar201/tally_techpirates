@@ -17,7 +17,7 @@ export default function Changepassword() {
         var data = {
             email : email
         };
-        console.log(data);
+        // console.log(data);
         context.startLoader();
         const url = "http://localhost:5000/api/user/requestOTP";
         var resp = await fetch(url, {
@@ -30,7 +30,7 @@ export default function Changepassword() {
 
         resp = await resp.json();
         context.stopLoader();
-        console.log(resp);
+        // console.log(resp);
         if(resp.error){
             context.showAlert(resp.error);
             return
@@ -63,7 +63,7 @@ export default function Changepassword() {
             otp : otp
         };
 
-        console.log(data);
+        // console.log(data);
         context.startLoader();
         const url = "http://localhost:5000/api/user/updatePassword";
         var resp = await fetch(url, {

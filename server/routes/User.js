@@ -26,18 +26,18 @@ router.post("/signup", async (req, resp) => {
         }
         
         if(name.trim().length < 3){
-            resp.status(400).send({ "error": "Please take valid Name" });
+            resp.status(400).send({ "error": "First name must be more than 2 chars long" });
             return;
         }
 
         if(password.trim().length < 8){
-            resp.status(400).send({ "error": "Please take valid password" });
+            resp.status(400).send({ "error": "Password must be more than 7 chars long" });
             return;
         }
 
         var  oldData = await User.findOne({ email: req.body.email });
         if (oldData != null) {
-            resp.send({ "error": "Email exists try another email" });
+            resp.send({ "error": "Email ID is already registered. Please try another Email ID" });
             return;
         }
 
@@ -57,8 +57,8 @@ router.post("/signup", async (req, resp) => {
         resp.send({ "token": jwtTokken});
 
 	} catch (err){
-        console.log(err)
-		resp.status(500).send({ "error": "Some server error occured try after some time" });
+        // console.log(err)
+		resp.status(500).send({ "error": "Server error occured. Try after some time" });
 	}
 
 });
@@ -68,7 +68,7 @@ router.post("/signin", async (req, resp) => {
 		const oldData = await User.findOne({ email: req.body.email});
 
 		if (oldData == null) {
-			resp.status(404).send({ "error": "Email not registered" });
+			resp.status(404).send({ "error": "Email ID not registered" });
 			return;
 		}
         if(await bcrypt.compare(req.body.password, oldData.password) === false){
@@ -82,8 +82,8 @@ router.post("/signin", async (req, resp) => {
 
 		resp.send({ "token": jwtTokken});
 	} catch (err){
-        console.log(err);
-		resp.status(500).send({ "error": "Some server error occured try after some time" });
+        // console.log(err);
+		resp.status(500).send({ "error": "Server error occured. Try after some time" });
 	}
 });
 
@@ -97,7 +97,7 @@ router.post('/auth' , resolveJWT, async (req , res)=>{
         userData.password = "";
         res.send({"user": userData});
     } catch (error) {
-		resp.status(500).send({ "error": "Some server error occured try after some time" });
+		res.status(500).send({ "error": "Server error occured. Try after some time" });
     }
 })
 
@@ -106,7 +106,7 @@ router.put("/updatePassword", async(req, resp)=>{
 		const oldData = await User.findOne({email : req.body.email});
 
         if (oldData == null) {
-			resp.status(404).send({ "error": "Email not registered" });
+			resp.status(404).send({ "error": "Email ID not registered" });
 			return;
 		}
         if(!oldData.otp || oldData.otp != req.body.otp){
@@ -123,10 +123,10 @@ router.put("/updatePassword", async(req, resp)=>{
             }
         });
 
-		resp.send({ "success": "Password Updated succesfully" });
+		resp.send({ "success": "Password updated successfully" });
 	} catch (err){
-        console.log(err);
-		resp.status(500).send({ "error": "Some server error occured try after some time" });
+        // console.log(err);
+		resp.status(500).send({ "error": "Server error occured. Try after some time" });
 	}
 })
 
@@ -135,7 +135,7 @@ router.post("/requestOTP", async(req, resp)=>{
     try {
         var user = await User.findOne({email:req.body.email})
         if(!user){
-            resp.status(400).send({error:"Email not registered"});
+            resp.status(400).send({error:"Email ID not registered"});
             return;
         }
         let transport = nodemailer.createTransport({
@@ -160,19 +160,19 @@ router.post("/requestOTP", async(req, resp)=>{
         var x = await transport.sendMail(mailOptions);
         
         if(x.error){
-            resp.status(500).send({"error": "Some server error occured try after some time" })
+            resp.status(500).send({"error": "Server error occured. Try after some time" })
         }else{
             await User.findByIdAndUpdate(user.id, {
                 $set:{
                     otp : otp
                 }
             })
-            resp.status(200).send({success:"OTP send to mail"});
+            resp.status(200).send({success:"OTP sent to Email ID"});
         }
 
     } catch (error) {
-        console.log(error)
-        resp.status(500).send({"error": "Some server error occured try after some time" })
+        // console.log(error)
+        resp.status(500).send({"error": "Server error occured. Try after some time" })
     }
 })
 

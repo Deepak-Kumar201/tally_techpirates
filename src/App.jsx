@@ -23,17 +23,8 @@ function App() {
 		context.stopLoader();
 	}
 
-	window.onbeforeunload = ()=>{
-		var filling = localStorage.getItem("filling");
-		var filled = localStorage.getItem("filled");
-		if(!filling) return;
+	const onBackButtonEvent = ()=>{
 		
-		if(!filled) filled = [];
-		else filled = JSON.parse(filled);
-		console.log("object");
-		filled.push(filling);
-		localStorage.setItem("filled",JSON.stringify(filled));
-		localStorage.removeItem("filling");
 	}
 
 	useEffect(()=>{
@@ -73,14 +64,6 @@ function App() {
 					<Formerror/>
 				</Route>
 			</Switch>
-			{/* <FrontPage /> */}
-			{/* <HomePage /> */}
-			{/* <Card /> */}
-			{/* <YourForms /> */}
-			{/* <Form /> */}
-			{/* <ScoreCard /> */}
-			{/* <ShowForm /> */}
-			{/* <QuesStatic /> */}
 		</Router>
 	);
 }

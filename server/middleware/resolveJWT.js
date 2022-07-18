@@ -6,7 +6,8 @@ const resolveJWT = (req, resp, next) => {
 		req.body.id = decoded.id;
 		next();
 	} catch (error) {
-		resp.status(400).json({ error: "Unable to authanticate the user" });
+		console.log(error);
+		resp.status(400).json({ error: "Unable to authenticate the user" });
 	}
 }
 

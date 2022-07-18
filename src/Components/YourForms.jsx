@@ -1,13 +1,15 @@
 import React , {useContext} from 'react';
 import baseContext from "../Context/baseContext";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Card from './Card';
 import './Styles/YourForms.css';
 import Logo from '../Images/logo.png';
 
 export default function YourForms() {
+    const history = useHistory();
     const logout = ()=>{
         localStorage.clear('token');
+        history.push("/")
         window.location.reload();
     }
 

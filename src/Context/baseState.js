@@ -52,7 +52,7 @@ const BaseState = (props) => {
             showAlert(resp.error);
             localStorage.clear("token");
         }else{
-            console.log(resp)
+            // console.log(resp)
             setuser(resp.user);
         }
     }
@@ -69,31 +69,32 @@ const BaseState = (props) => {
         if(data.que.length == 0){
             return {error:"Question is empty"};
         }
-        console.log(data);
+        // console.log(data);
         if(data.ans[0].length == 0){
             return {error:"Answer is empty"};
         }
         props.forEach((elem, ind)=>{
             if(ind == 0) {
                 data.points = [parseInt(elem.value)];
-                data.score = [parseInt(elem.value)];
+                data.score = parseInt(elem.value);
             }
             else if(ind == 1){
                 data.time = parseInt(elem.value);
-                console.log(data.time)
+                // console.log(data.time)
             }
             else data.minScore = elem.value;
         })
         
-        if(data.time == 0){
-            return {error : "Question cann't have 0 time"};
+        if(data.time && data.time <= 0){
+            return {error : "Time must be greater than 0"};
         }
-        var allAllZero = true;
-        for(var i of data.points){
-            if(i != 0) allAllZero = false;
+        
+        if(data.score <= 0){
+            return {error : "Score must be positive number"};
         }
-        if(allAllZero){
-            return {error : "Question cann't have zero points"}
+
+        if(data.minScore && (data.score < data.minScore || data.minScore <= 0)){
+            return {error : "Min score mush be smaller than score and positive"};
         }
 
         console.log(data);
@@ -137,12 +138,12 @@ const BaseState = (props) => {
             }
             else data.minScore = elem.value;
         })
-        if(data.time == 0) return {error : "Question cann't have zero time"};
+        if(data.time && data.time <= 0) return {error : "Time must be greater than 0"};
         if(option.length == 0){
             return {error: "Question should have at least 1 option"};
         }
-        if(data.score == 0){
-            return {error : "Question Cann't have zero score"};
+        if(data.score <= 0){
+            return {error : "Score must be positive number"};
         }
 
         var alloption = false;
@@ -150,7 +151,7 @@ const BaseState = (props) => {
             if(i.length == 0) alloption = true;
         }
         if(alloption) {
-            return {error:"Option Cann't be empty"};
+            return {error:"Option Can't be empty"};
         }
 
         var ans = true;
@@ -158,9 +159,12 @@ const BaseState = (props) => {
             if(i) ans = false;
         }
         if(ans){
-            return {error : "Question should have answer marked"};
+            return {error : "Question must have answer marked"};
         }
-        console.log(data);
+        // console.log(data);
+        if(data.minScore && (data.score < data.minScore || data.minScore <= 0)){
+            return {error : "Min score mush be smaller than score and positive"};
+        }
         return data;
     }
 
@@ -191,13 +195,18 @@ const BaseState = (props) => {
         if(option.length == 0){
             return {error: "Question should have at least 1 option"};
         }
-        if(score == 0){
-            return {error : "Question Cann't have zero score"};
+
+        if(score <= 0){
+            return {error : "Score must be positive number"};
         }
-        console.log("soce", score);
-        var ansOpt = true;
-        for(var i of ans){
-            if(i) ansOpt = false;
+        // console.log("soce", score);
+        var ansOpt = true, invalidSc = false;
+        for(var i = 0; i < ans.length; i++){
+            if(ans[i]) ansOpt = false;
+            if((ans[i] == false && data.points[i] > 0) || data.points[i] < 0 ||(ans[i] && data.points[i] == 0)) invalidSc = true;
+        }
+        if(invalidSc){
+            return {error : "Invalid Score"};
         }
         if(ansOpt){
             return {error : "Question should have answer marked"};
@@ -209,7 +218,7 @@ const BaseState = (props) => {
         }
 
         if(alloption) {
-            return {error:"Option Cann't be empty"};
+            return {error:"Option Can't be empty"};
         }
 
 
@@ -220,8 +229,11 @@ const BaseState = (props) => {
             }
             else data.minScore = elem.value;
         })
-        if(data.time == 0) return {error : "Question cann't have zero time"};
-        console.log(data);
+        if(data.minScore && (data.score < data.minScore || data.minScore <= 0)){
+            return {error : "Min score mush be smaller than score and positive"};
+        }
+        if(data.time && data.time <= 0) return {error : "Time must be greater than 0"};
+        // console.log(data);
         return data;
         
     }
@@ -241,7 +253,7 @@ const BaseState = (props) => {
         if(document.getElementById("foreverAccpet").checked == false){
             var st = (new Date(document.getElementById("startTime").value));
             var ed = (new Date(document.getElementById("endTime").value));
-            console.log(st, ed, Date.now());
+            // console.log(st, ed, Date.now());
             if(document.getElementById("startTime").value.length == 0 || document.getElementById("endTime").value.length == 0){
                 return {error : "Invalid times"};
             }
@@ -260,7 +272,7 @@ const BaseState = (props) => {
 
         title = child[1].children[2].value;
         description = child[2].children[2].value;
-        console.log(timeBound);
+        // console.log(timeBound);
         var n = child.length;
         for (var i = 3; i < n - 1; i++) {
             var id = child[i].getAttribute("id");
@@ -355,7 +367,7 @@ const BaseState = (props) => {
             shuffle:shuffle,
             token : localStorage.getItem('token')
         };
-        console.log(data);
+        // console.log(data);
         // return;
         
         const url = "http://localhost:5000/api/forms/create";
@@ -370,7 +382,7 @@ const BaseState = (props) => {
         });
 
         resp = await resp.json();
-        console.log(resp);
+        // console.log(resp);
         stopLoader();
         if(resp.error){
             showAlert(resp.error);
@@ -394,9 +406,9 @@ const BaseState = (props) => {
 
     const addCookie = (key, value)=>{
         var cookie = document.cookie;
-        console.log("cookies ", cookie);
+        // console.log("cookies ", cookie);
         cookie += `${key}=${value};httpOnly;`;
-        console.log(cookie);
+        // console.log(cookie);
         document.cookie = cookie;
     }
 

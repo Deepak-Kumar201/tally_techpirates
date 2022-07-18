@@ -42,7 +42,7 @@ export default function HomePage(props) {
       return;
     }
     context.startLoader();
-    console.log(data);
+    // console.log(data);
     var uri = "http://localhost:5000/api/user/signin";
     var resp = await fetch(uri, {
       method: "POST",
@@ -136,7 +136,7 @@ export default function HomePage(props) {
         const token = credential.accessToken;
         // The signed-in user info.
         const user = result.user;
-        console.log(user);
+        // console.log(user);
         // ...
         context.startLoader();
         var data = {
@@ -209,7 +209,7 @@ export default function HomePage(props) {
                     color: type != "admin" ? "white" : "black",
                   }}
                 >
-                  Candidate
+                  Participants
                 </button>
               </div>
               <div className="signin-admin-main">

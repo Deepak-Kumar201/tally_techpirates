@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export default function Formerror() {
     return (
@@ -6,6 +7,9 @@ export default function Formerror() {
 			{
                 (new URL(window.location.href)).searchParams.get("m")
             }
+            <br/>
+            <br/>
+            <Link to="/">Go To Home</Link>
 		</div>
         
     )

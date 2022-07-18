@@ -73,8 +73,8 @@
 
 .signin-full
 {
-    width: 100vw;
-    height: 100vh;
+    min-width: 100vw;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -297,3 +297,32 @@
 
 
 /* Login Page */
+
+@media only screen and (max-width: 768px) {
+    .signin{
+        width: 60%;
+    }
+}
+@media only screen and (max-width: 600px) {
+    .signin{
+        width: 80%;
+    }
+}
+@media only screen and (max-width: 600px) {
+    .main-head{
+        font-size: 30px;
+        margin-top: 10px;
+    }
+}
+@media only screen and (max-width: 600px) {
+    .form-head-attendant
+    {
+        font-size: 25px;
+    }
+}
+@media only screen and (max-width: 768px) {
+    .btn-option{
+        font-size: 13px;
+        padding: 5px 7px;
+    }
+}

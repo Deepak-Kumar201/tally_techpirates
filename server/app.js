@@ -15,7 +15,7 @@ app.use(cookieParser());
 //hj4h5432j5h$$Fh5i348u98**HU(*YGY$G#JH#)
 
 var dburi = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.xmo2p.mongodb.net/tally400?retryWrites=true&w=majority`;
-console.log(dburi)
+// console.log(dburi)
 mongoose.connect(dburi, (err)=>{
     if(err) console.log(err);
     else console.log("Database connected");
@@ -24,7 +24,6 @@ mongoose.connect(dburi, (err)=>{
 app.use(express.static(path.join(__dirname, 'build')));
 
 app.get('/', function (req, res) {
-    console.log(req.cookies.name)
     res.send("<H1>Hello I am server</H1>");
 });
 app.use("/api/user", require("./routes/User"));

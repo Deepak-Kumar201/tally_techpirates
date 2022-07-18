@@ -29,6 +29,7 @@ export default function LeftFill() {
                         type="radio"
                         id={"option" + ind}
                         name={que.id}
+                        key={que.id + i + "opt"}
                         defaultChecked={context.ans[que.ind] == null?false:context.ans[que.ind][ind]}
                         onChange = {()=>{updateCheckAns(que.id)}}
                     />
@@ -55,6 +56,7 @@ export default function LeftFill() {
                         type="checkbox"
                         id={"option" + ind}
                         name={que.id}
+                        key={que.id + i + "opt"}
                         defaultChecked={context.ans[que.ind]?context.ans[que.ind][ind]:false}
                         onChange = {()=>{updateCheckAns(que.id)}}
                     />
@@ -67,7 +69,7 @@ export default function LeftFill() {
                 </div>
             )
         })  
-        console.log(temp);
+        // console.log(temp);
         return temp;
     };
 

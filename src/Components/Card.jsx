@@ -17,6 +17,7 @@ export default function Card({data}) {
     }
     const chgState = async(e)=>{
         setstatus(e.target.checked);
+        console.log("afddfdsf")
         context.startLoader();
         const uri = "http://localhost:5000/api/forms/updateRecieve";
         data = {
@@ -32,6 +33,8 @@ export default function Card({data}) {
             },
             body: JSON.stringify(data),
         });
+        resp = await resp.json();
+        console.log(resp);
         context.stopLoader();
     }
     

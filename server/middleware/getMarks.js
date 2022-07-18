@@ -7,18 +7,18 @@ const getMarks =  async(req)=>{
 		if(!answers){
 			return {"error":"invalid form id"};
 		}
-		// console.log(answers);
+		// // console.log(answers);
 		answers = JSON.parse(answers.answer[0]);
 
 		var userAns = req.body.answer;
-		console.log(userAns);
+		// console.log(userAns);
 		var pointArr = [];
 		var sum = 0;
 
 		for(var i of answers){
 			var queId = i.queId;
 			var userResp = userAns[queId].ans;
-			console.log(userResp, i);
+			// console.log(userResp, i);
 			if(userResp.length == 0) {
 				pointArr.push(0);
 				i.wrong++;	
@@ -27,14 +27,14 @@ const getMarks =  async(req)=>{
 
 			var n = i.ans.length;
 			var point = 0;
-			console.log("resposes ",i.ans, userResp);
+			// console.log("resposes ",i.ans, userResp);
 			for(var j = 0; j < n; j++){
 				if(i.ans[j] === userResp[j])  {
-					console.log(i.ans[j], userResp[j]);
+					// console.log(i.ans[j], userResp[j]);
 					point+=i.points[j];
 				}else if(i.ans[j] == true && userResp[j] == false);
 				else {
-					// console.log(i.ans[j], userResp[j]);
+					// // console.log(i.ans[j], userResp[j]);
 					point = 0;
 					i.wrong++;
 					break;
@@ -46,7 +46,8 @@ const getMarks =  async(req)=>{
 				i.right++;
 				if(i.decreasing){
 					var time = Math.max(0,(point - i.minScore));
-					time = parseFloat(((i.time - userAns[queId].time)/i.time) * time) + parseInt(i.minScore);
+					if(point > i.minScore) time = parseFloat(((i.time - userAns[queId].time)/i.time) * time) + parseInt(i.minScore);
+					else time = point;
 					pointArr.push(time);
 					sum += time;
 				}else{
@@ -62,11 +63,12 @@ const getMarks =  async(req)=>{
 				answer : JSON.stringify(answers)
 			}
 		});
+		sum = parseInt(sum * 100) / 100
 		var sc = {sum : sum, points : pointArr};
-		console.log(sc);
+		// console.log(sc);
 		return {sum : sum, points : pointArr};
 	}catch(error){
-		console.log(error);
+		// console.log(error);
 		return {error:"Server error"};
 	}
 }

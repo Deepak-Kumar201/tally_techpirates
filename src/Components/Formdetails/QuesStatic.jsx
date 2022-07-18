@@ -26,7 +26,7 @@ export default function QuesStatic({formQue}) {
             });
 
             resp = await resp.json();
-            console.log("resp -> ", JSON.parse(resp.data.answer[0]));
+            // console.log("resp -> ", JSON.parse(resp.data.answer[0]));
             context.stopLoader();
             if(resp.error){
                 context.showAlert(resp.error);
@@ -47,11 +47,11 @@ export default function QuesStatic({formQue}) {
                             return (
                                 <div className="accordion-item">
                                     <h2 className="accordion-header" id="headingOne">
-                                    <button className="accordion-button  shadow-none" type="button" data-bs-toggle="collapse" data-bs-target={"#collapseOne"+ind} aria-expanded="true" aria-controls="collapseOne">
-                                        Que No {ind + 1} : {JSON.parse(formQue[elem.queId]).que}
+                                    <button className="accordion-button dark shadow-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target={"#collapseOne"+ind} aria-expanded="false" aria-controls="collapseOne">
+                                        Que No {ind + 1} : <div style={{color:'white', display:'inline', marginLeft:'10px'}}>{JSON.parse(formQue[elem.queId]).que}</div>
                                     </button>
                                     </h2>
-                                    <div id={"collapseOne"+ind} className="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                    <div id={"collapseOne"+ind} className="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                         <div className="accordion-body">
                                             {
                                                 elem.wrong+elem.right == 0?

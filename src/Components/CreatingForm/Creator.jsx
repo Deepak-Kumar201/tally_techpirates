@@ -28,7 +28,7 @@ export default function Creator() {
 			context.showAlert("Description Cannot Be Empty");
 			return;
 		}
-		console.log("object");
+		// console.log("object");
 		var res = await context.save();
 		if(res.error) {
 			context.showAlert(res.error);

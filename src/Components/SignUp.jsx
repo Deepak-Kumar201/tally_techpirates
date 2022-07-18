@@ -23,6 +23,10 @@ export default function SignUp() {
         let Email = document.getElementById("EMAIL").value.trim();
         let Pass = document.getElementById("PASS").value;
         let ConfPass = document.getElementById("CONFPASS").value;
+        if(!onlyLettersAndSpaces(Name)){
+            context.showAlert("Name can conatin only alphabat and space");
+            return;            
+        }
         if(Name == "" || Email == "" || Pass == "" || ConfPass == "")
         {
             context.showAlert("Enter all fields data");
@@ -73,7 +77,9 @@ export default function SignUp() {
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const provider = new GoogleAuthProvider(app);
-
+    function onlyLettersAndSpaces(str) {
+        return /^[A-Za-z\s]*$/.test(str);
+    }
     const signupwithGoogle = (e) => {
         signInWithPopup(auth, provider)
       .then(async(result) => {
@@ -83,7 +89,7 @@ export default function SignUp() {
         const token = credential.accessToken;
         // The signed-in user info.
         const user = result.user;
-        console.log(user);
+        // console.log(user);
         context.startLoader();
             let JsonObj = {
                 "name" : user.displayName,

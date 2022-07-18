@@ -6,6 +6,14 @@ const Formresp = require("../models/Formresp");
 const Forms = require("../models/Forms");
 const User = require("../models/User");
 const router = express.Router();
+const Redis = require('ioredis');
+const redis = new Redis({
+	port: 14058, 
+	host: process.env.REDIS_HOST, 
+	username: "default", 
+	password: process.env.REDIS_PASS,
+	db: 0, 
+});
 
 router.post('/create', resolveJWT, async (req, resp) => {
 	try {
@@ -58,21 +66,26 @@ router.post('/create', resolveJWT, async (req, resp) => {
 		resp.send({ "fId": newForm.id });
 
 	} catch (error){
-		console.log(error);
-		resp.status(500).send({ "error": "Some server error occured try after some time" });
+		// console.log(error);
+		resp.status(500).send({ "error": "Server error occured. Try after some time" });
 	}
 })
 
 router.post("/getForm", async (req, resp) => {
 	try {
-		const data = await Forms.findById(req.body.fId);
+		var data = JSON.parse(await redis.get(req.body.fId));
 
+		if(!data) {
+			console.log("database Hit")
+			data = await Forms.findById(req.body.fId);
+			redis.set(req.body.fId, JSON.stringify(data), "EX", 1000);
+		}
+		// console.log(data);
 		if (data == null) {
-			resp.status(400).send({ "error": "Quiz not found please check ID" });
+			resp.status(400).send({ "error": "Quiz not found. Please check Quiz ID" });
 			return;
 		}
 		
-        // checking time valid
         var time = data.time, timeValid = false;
         if(time[0] == -1) timeValid = true;
         else if(time[0] < Date.now() && time[1] > Date.now()) timeValid = true;
@@ -81,21 +94,21 @@ router.post("/getForm", async (req, resp) => {
             resp.status(400).send({"error" : "Quiz is not accepting respone now"});
             return;
         }
-
+		// console.log(req)
 		//checking filledForms 
 		var filled = req.body.filled;
 		if(!filled) filled = [];
 		else filled = JSON.parse(filled)
-		console.log(filled);
-		if(filled.indexOf(data.id) != -1){
-			resp.status(400).send({"error":"You have already filled Quiz"});
+		// console.log("filled ->", filled);
+		if(filled.indexOf(data._id) != -1){
+			resp.status(400).send({"error":"You have already filled the Quiz"});
 			return;
 		}
         
 		resp.send(data);
 	} catch (err){
-		console.log(err);
-		resp.status(500).send({ "error": "Server error occured" });
+		// console.log(err);
+		resp.status(500).send({ "error": "Server error occured. Try after some time" });
 	}
 })
 
@@ -138,19 +151,19 @@ router.put("/fill", async (req, resp) => {
 		};
 
 		toAdd = JSON.stringify(toAdd);
-
+		var rep = await Formresp.findOne({fId:req.body.fId});
 		await Formresp.findOneAndUpdate({fId:req.body.fId}, {
 			$push : {
 				responses : toAdd
 			}
 		});
-		console.log(filled, getM);
+		// console.log(filled, getM);
 		filled.push(req.body.fId);
-		resp.cookie('filled', filled, {httpOnly:true}).send({"success":"You responded successfully", filled: filled, score : getM.sum});
+		resp.cookie('filled', filled, {httpOnly:true}).send({"success":"You responded successfully", filled: filled, score : getM.sum,  respNo : (rep.responses.length + 1)});
 		
 	} catch (err){
-		console.log(err);
-		resp.status(500).send({ "error": "Some server error occured try after some time" });
+		// console.log(err);
+		resp.status(500).send({ "error": "Server error occured. Try after some time" });
 	}
 })
 
@@ -162,12 +175,12 @@ router.post("/changeactive", resolveJWT, async(req, resp)=>{
 			}
 		});
 		if(x.acknowledged == false){
-			resp.status(400).send({"error":"Cann't modify Quiz option"});
+			resp.status(400).send({"error":"Can't modify Quiz option"});
 		}
-		console.log(x);
+		// console.log(x);
 		resp.status(200).send({success:"Time Updated"});
 	} catch (error) {
-		resp.status(500).send({ "error": "Some server error occured try after some time" });
+		resp.status(500).send({ "error": "Server error occured. Try after some time" });
 	}
 })
 
@@ -175,7 +188,7 @@ router.post("/getanswer", resolveJWT,async (req, resp)=>{
 	try {
 		var form = await Forms.findOne({_id : req.body.fId, user : req.body.id});
 		if(!form){
-			resp.status(401).send({error:"Cann't get Quiz"});
+			resp.status(401).send({error:"Can't get Quiz"});
 			return;
 		}
 		var answers = await Formans.findOne({fId : req.body.fId});
@@ -185,7 +198,7 @@ router.post("/getanswer", resolveJWT,async (req, resp)=>{
 		}
 		resp.send({data:answers});
 	} catch (error) {
-		resp.status(500).send({ "error": "Some server error occured try after some time" });
+		resp.status(500).send({ "error": "Server error occured. Try after some time" });
 	}
 });
 
@@ -193,7 +206,7 @@ router.post("/getresponse", resolveJWT,async (req, resp)=>{
 	try {
 		var form = await Forms.findOne({_id : req.body.fId, user : req.body.id});
 		if(!form){
-			resp.status(401).send({error:"Cann't get Quiz"});
+			resp.status(401).send({error:"Can't get Quiz"});
 			return;
 		}
 		var answers = await Formresp.findOne({fId : req.body.fId});
@@ -203,7 +216,7 @@ router.post("/getresponse", resolveJWT,async (req, resp)=>{
 		}
 		resp.send({data:answers});
 	} catch (error) {
-		resp.status(500).send({ "error": "Some server error occured try after some time" });
+		resp.status(500).send({ "error": "Server error occured. Try after some time" });
 	}
 });
 
@@ -211,29 +224,35 @@ router.post("/getauthform", resolveJWT,async (req, resp)=>{
 	try {
 		var form = await Forms.findOne({_id : req.body.fId, user : req.body.id});
 		if(!form){
-			resp.status(401).send({error:"Cann't get Quiz"});
+			resp.status(401).send({error:"Can't get Quiz"});
 			return;
 		}
 		resp.send({data:form});
 	} catch (error) {
-		resp.status(500).send({ "error": "Some server error occured try after some time" });
+		resp.status(500).send({ "error": "Server error occured. Try after some time" });
 	}
 });
 
 router.post('/updateRecieve', resolveJWT,async (req, resp)=>{
 	try {
+		// console.log("first")
 		var x = await Forms.updateOne({_id : req.body.fId, user : req.body.id}, {
 			$set:{
 				accepting : req.body.accepting
 			}
 		});
+		
 		if(x.acknowledged == false){
-			resp.status(400).send({"error":"Cann't modify Quiz option"});
+			resp.status(400).send({"error":"Can't modify Quiz option"});
+			return;
 		}
-		console.log(x);
+		var data = await Forms.findById(req.body.fId);
+		await redis.set(req.body.fId, JSON.stringify(data), "EX", 1000);
+		// console.log(x);
 		resp.status(200).send({success:"Time Updated"});
 	} catch (error) {
-		resp.status(500).send({ "error": "Some server error occured try after some time" });
+		console.log(error)
+		resp.status(500).send({ "error": "Server error occured. Try after some time" });
 	}
 })
 

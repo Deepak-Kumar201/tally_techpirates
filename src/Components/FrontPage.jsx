@@ -25,6 +25,7 @@ export default function FrontPage() {
 
     const logout = ()=>{
         localStorage.clear('token');
+        history.push("/")
         window.location.reload();
     }
 

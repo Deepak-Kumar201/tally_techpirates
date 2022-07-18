@@ -36,17 +36,27 @@ const FillState = (props) => {
         }
       
         return array;
-      }
+    }
 
 
     const getForm = async (id)=>{
         var uri = "http://localhost:5000/api/forms/getForm";
+        var filled = localStorage.getItem("filled");
+        if(!filled) filled = [];
+        else filled = JSON.parse(filled);
+        if(filled.indexOf(id) != -1){
+            var m = "You have already attempted quiz";
+            history.push('/status?m='+m)
+            localStorage.removeItem("filling")
+            return;
+        }
+
         var data = {
             fId : id,
-            filled : localStorage.getItem("filled")
+            // filled : localStorage.getItem("filled")
         }
         setfId(id);
-
+        // console.log("data ", data);
         context.startLoader();
         var resp = await fetch(uri, {
             method: "POST",
@@ -57,10 +67,12 @@ const FillState = (props) => {
         });
 
         resp = await resp.json();
+        // console.log("response -> ", resp);
         context.stopLoader();
         if(resp.error){
             var m = resp.error;
             history.push('/status?m='+m)
+            localStorage.removeItem("filling")
             return;
         }
         data = resp.data;
@@ -68,10 +80,17 @@ const FillState = (props) => {
         setdesc(resp.description);
         var x = context.user.name;
         if(!x)x = "";
-        while(x.trim().length == 0){
+        // console.log("username");
+
+        while(x != null && x.trim().length == 0){
             x = window.prompt("Enter your Name");
         }
-
+        if(x == null){
+            var m = "You need to enter your name.";
+            history.push('/status?m='+m)
+            localStorage.removeItem("filling")
+            return;
+        }
         setname(x.trim());
         localStorage.setItem("filling", resp._id);
         const que = JSON.parse(JSON.parse(data));
@@ -79,13 +98,13 @@ const FillState = (props) => {
         for(var i in que){
             var temp = JSON.parse(que[i]);
             temp.id = i;
-            temp.ind = arr.length
             arr.push(temp);
         }
-
-        console.log(resp);
-
         if(resp.shuffle) arr = shuffle(arr)
+        
+        arr.forEach((elem, ind)=>{
+            elem.ind = ind;
+        })
 
         var clr = [], a = [];
         for(var i = 0; i < arr.length; i++){
@@ -99,6 +118,20 @@ const FillState = (props) => {
         setCurQue(0);
         setLast(0);
     }
+
+    window.onbeforeunload = async ()=>{
+		var filling = localStorage.getItem("filling");
+		var filled = localStorage.getItem("filled");
+		if(!filling) return;
+		
+		if(!filled) filled = [];
+		else filled = JSON.parse(filled);
+		// console.log("object");
+		filled.push(filling);
+		localStorage.setItem("filled",JSON.stringify(filled));
+		localStorage.removeItem("filling");
+        await submit();
+	}
 
     useEffect(()=>{
         if(curQueTimer == 0) getNextQue();
@@ -123,7 +156,7 @@ const FillState = (props) => {
         //getting next que with timer > 0
         for(var i = curQue + 1; i < temp.length +curQue + 1; i++){
             if(temp[i % temp.length].time !== 0) {
-                console.log(temp[i % temp.length]);
+                // console.log(temp[i % temp.length]);
                 setCurQue(i % temp.length);
                 return;
             }
@@ -132,7 +165,7 @@ const FillState = (props) => {
     }
 
     useEffect(()=>{
-        console.log(ans);
+        // console.log(ans);
     }, [ans]);
 
     useEffect(()=>{
@@ -172,7 +205,7 @@ const FillState = (props) => {
                 filled[queArr[i].id].ans = [];
             }
         }
-        console.log(filled);
+        // console.log(filled);
         context.startLoader();
         var uri = "http://localhost:5000/api/forms/fill";
         var data = {
@@ -199,8 +232,12 @@ const FillState = (props) => {
             history.push('/status?m='+m)
             return;
         }
-        localStorage.setItem("filled", JSON.stringify(resp.filled));
-        var m = "Form Submitted Successfully and your score is "+resp.score;
+        var arr = localStorage.getItem("filled");
+        if(!arr) arr = [];
+        else arr = JSON.parse(arr);
+        arr.push(fId);
+        localStorage.setItem("filled", JSON.stringify(arr));
+        var m = "Form Submitted Successfully and your score is "+resp.score + " and your Participant ID is " + resp.respNo;
         history.push("/status?m="+m);
     }
 

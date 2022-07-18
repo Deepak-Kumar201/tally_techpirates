@@ -18,7 +18,7 @@ export default function Header() {
 			<div className="container">
 				<div className="formSetting">
 					<div>
-						<input type="checkbox" name="foreverAccpet" id="foreverAccpet" className="form-check-input" checked={alwaysAccpet} onChange={(e)=>{setalwaysAccpet(e.target.checked)}}/> <label htmlFor="foreverAccpet">Decide Later</label>
+						<input type="checkbox" name="foreverAccpet" id="foreverAccpet" className="form-check-input" checked={alwaysAccpet} onChange={(e)=>{setalwaysAccpet(e.target.checked)}}/> <label htmlFor="foreverAccpet">On/Off Manually</label>
 					</div>
 					{
 					alwaysAccpet == false?(
@@ -38,12 +38,12 @@ export default function Header() {
 				</div>
 
 				<div className="formSetting">
-					<div><input type="checkbox" name="suffleques" id="suffleques" className="form-check-input"/><label htmlFor="suffleques">Suffle Questions</label></div>
-					<div><input type="checkbox" name="timeBound" id="timeBound" checked={timeBound} onChange={(e)=>{setTimeBound(e.target.checked)}} className="form-check-input"/><label htmlFor="timeBound">Are Question Time Bound</label></div>
+					<div><input type="checkbox" name="suffleques" id="suffleques" className="form-check-input"/><label htmlFor="suffleques">Shuffle Questions</label></div>
+					<div><input type="checkbox" name="timeBound" id="timeBound" checked={timeBound} onChange={(e)=>{setTimeBound(e.target.checked)}} className="form-check-input"/><label htmlFor="timeBound">Time Bound Questions</label></div>
 					<div>
 					{
 						timeBound == true?(
-								<><input type="checkbox" id="decreasing" name="decreasing" checked={decreasing} onChange={(e)=>{setDecreasing(e.target.checked)}} className="form-check-input"/> <label htmlFor="decreasing">Decreasing Score</label></>
+								<><input type="checkbox" id="decreasing" name="decreasing" checked={decreasing} onChange={(e)=>{setDecreasing(e.target.checked)}} className="form-check-input"/> <label htmlFor="decreasing">Variable Scoring based on Time</label></>
 								):(
 									<></>
 									)
@@ -53,7 +53,7 @@ export default function Header() {
 			</div>
 			<div className="title container" type="title" id="title">
 				<h2>Title of your Quiz</h2><br />
-				<textarea className="form-control" placeholder="Enter Form Title" id="formTitle" rows="1"  onInput={shrinkText} style={{ resize: "none" }}></textarea>
+				<textarea className="form-control" placeholder="Enter quiz Title" id="formTitle" rows="1"  onInput={shrinkText} style={{ resize: "none" }}></textarea>
 			</div>
 			<div className="header container" type="description" id="descr">
 				<h3>Description</h3><br/>

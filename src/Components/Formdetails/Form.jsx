@@ -17,6 +17,7 @@ export default function Form() {
 
     const logout = ()=>{
         localStorage.clear('token');
+        history.push("/")
         window.location.reload();
     }
     const highlight = (e)=>{
@@ -69,7 +70,7 @@ export default function Form() {
             });
     
             resp = await resp.json();
-            console.log("form data-> ", resp.data);
+            // console.log("form data-> ", resp.data);
             context.stopLoader();
             if(resp.error){
                 context.showAlert(resp.error);
