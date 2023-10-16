@@ -1,0 +1,46 @@
+version: '3'
+services:
+  frontend:
+    image: techpirates-client
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - "backend"
+    networks:
+      - techpirates
+  backend:
+    image: techpirates-server
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    depends_on:
+      - "mongo"
+    environment:
+      - EMAIL_USERNAME=tallycode40@gmail.com
+      - EMAIL_PASSWORD=jllktfolzynfdrqi
+      - JWT_SECRET=hj4h5432j5h$$Fh5i348u98**HU(*YGY$G#JH#)
+      - REDIS_HOST=redis-11733.c85.us-east-1-2.ec2.cloud.redislabs.com
+      - REDIS_PASS=mv8VMuk6Mwg6jHiCj4VX3sCf0xdDkKxQ
+    networks:
+      - techpirates
+  mongo:
+    image: mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - data:/data/db
+    networks:
+      - techpirates
+
+volumes:
+  data:
+
+networks:
+  techpirates:
+    driver: bridge

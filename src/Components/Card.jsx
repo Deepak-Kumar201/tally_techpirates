@@ -35,6 +35,7 @@ export default function Card({data}) {
         });
         resp = await resp.json();
         console.log(resp);
+        await context.authUser();
         context.stopLoader();
     }
     

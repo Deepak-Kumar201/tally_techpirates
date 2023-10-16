@@ -3,7 +3,7 @@ var cors = require("cors");
 require('dotenv').config();
 var app = express();
 const path = require('path');
-const PORT = process.env.PORT||5000;
+const PORT = 5000;
 app.use(cors());
 
 const mongoose = require("mongoose");
@@ -11,11 +11,8 @@ var cookieParser = require('cookie-parser');
 app.use(express.json());
 app.use(cookieParser());  
 
-
-//hj4h5432j5h$$Fh5i348u98**HU(*YGY$G#JH#)
-
-var dburi = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.xmo2p.mongodb.net/tally400?retryWrites=true&w=majority`;
-// console.log(dburi)
+var dburi = `mongodb://mongo:27017/tally400`;
+console.log(dburi)
 mongoose.connect(dburi, (err)=>{
     if(err) console.log(err);
     else console.log("Database connected");

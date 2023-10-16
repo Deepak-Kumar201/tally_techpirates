@@ -8,7 +8,7 @@ const User = require("../models/User");
 const router = express.Router();
 const Redis = require('ioredis');
 const redis = new Redis({
-	port: 14058, 
+	port: 11733, 
 	host: process.env.REDIS_HOST, 
 	username: "default", 
 	password: process.env.REDIS_PASS,

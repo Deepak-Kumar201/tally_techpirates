@@ -385,6 +385,7 @@ const BaseState = (props) => {
 
         resp = await resp.json();
         // console.log(resp);
+        authUser();
         stopLoader();
         if(resp.error){
             showAlert(resp.error);
