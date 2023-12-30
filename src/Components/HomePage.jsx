@@ -116,12 +116,13 @@ export default function HomePage(props) {
   };
 
   const firebaseConfig = {
-    apiKey: "AIzaSyAwoYWVrnF-4nbdMJ7DMhZbK_3SkFPhniI",
-    authDomain: "tallytechpirates.firebaseapp.com",
-    projectId: "tallytechpirates",
-    storageBucket: "tallytechpirates.appspot.com",
-    messagingSenderId: "1002084638911",
-    appId: "1:1002084638911:web:b7e7fa5575aa50f469660a",
+    apiKey: "AIzaSyB-qg7Y4JoCcNbvVeRx2cDUT7VDIW6KIv8",
+    authDomain: "tallycode-90050.firebaseapp.com",
+    projectId: "tallycode-90050",
+    storageBucket: "tallycode-90050.appspot.com",
+    messagingSenderId: "896114246252",
+    appId: "1:896114246252:web:5e0928092328b13eb4ce49",
+    measurementId: "G-QFX3SNDK0J"
   };
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
