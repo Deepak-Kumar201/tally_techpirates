@@ -19,7 +19,7 @@ export default function Card({data}) {
         setstatus(e.target.checked);
         console.log("afddfdsf")
         context.startLoader();
-        const uri = "http://localhost:5000/api/forms/updateRecieve";
+        const uri = "/api/forms/updateRecieve";
         data = {
             fId : data._id,
             accepting : e.target.checked,

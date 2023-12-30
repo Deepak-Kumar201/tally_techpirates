@@ -81,7 +81,7 @@ router.post("/signin", async (req, resp) => {
 
 		resp.send({ "token": jwtTokken});
 	} catch (err){
-        // console.log(err);
+        console.log(err);
 		resp.status(500).send({ "error": "Server error occured. Try after some time" });
 	}
 });

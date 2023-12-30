@@ -40,7 +40,7 @@ const FillState = (props) => {
 
 
     const getForm = async (id)=>{
-        var uri = "http://localhost:5000/api/forms/getForm";
+        var uri = "/api/forms/getForm";
         var filled = localStorage.getItem("filled");
         if(!filled) filled = [];
         else filled = JSON.parse(filled);
@@ -207,7 +207,7 @@ const FillState = (props) => {
         }
         // console.log(filled);
         context.startLoader();
-        var uri = "http://localhost:5000/api/forms/fill";
+        var uri = "/api/forms/fill";
         var data = {
             name : name,
             answer : filled,

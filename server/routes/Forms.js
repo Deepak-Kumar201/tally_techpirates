@@ -7,13 +7,13 @@ const Forms = require("../models/Forms");
 const User = require("../models/User");
 const router = express.Router();
 const Redis = require('ioredis');
-const redis = new Redis({
-	port: 11733, 
-	host: process.env.REDIS_HOST, 
-	username: "default", 
-	password: process.env.REDIS_PASS,
-	db: 0, 
-});
+// const redis = new Redis({
+// 	port: 18178, 
+// 	host: "redis-18178.c321.us-east-1-2.ec2.cloud.redislabs.com", 
+// 	username: "default", 
+// 	password: "tQXYb0iaYc5EZLZ4rWHHS0cHShkszNOS",
+// 	db: "quizshetra", 
+// });
 
 router.post('/create', resolveJWT, async (req, resp) => {
 	try {
@@ -73,13 +73,13 @@ router.post('/create', resolveJWT, async (req, resp) => {
 
 router.post("/getForm", async (req, resp) => {
 	try {
-		var data = JSON.parse(await redis.get(req.body.fId));
+		// var data = JSON.parse(await redis.get(req.body.fId));
 
-		if(!data) {
-			console.log("database Hit")
-			data = await Forms.findById(req.body.fId);
-			redis.set(req.body.fId, JSON.stringify(data), "EX", 1000);
-		}
+		// if(!data) {
+		// 	console.log("database Hit")
+			var data = await Forms.findById(req.body.fId);
+		// 	redis.set(req.body.fId, JSON.stringify(data), "EX", 1000);
+		// }
 		// console.log(data);
 		if (data == null) {
 			resp.status(400).send({ "error": "Quiz not found. Please check Quiz ID" });
@@ -247,7 +247,7 @@ router.post('/updateRecieve', resolveJWT,async (req, resp)=>{
 			return;
 		}
 		var data = await Forms.findById(req.body.fId);
-		await redis.set(req.body.fId, JSON.stringify(data), "EX", 1000);
+		// await redis.set(req.body.fId, JSON.stringify(data), "EX", 1000);
 		// console.log(x);
 		resp.status(200).send({success:"Time Updated"});
 	} catch (error) {

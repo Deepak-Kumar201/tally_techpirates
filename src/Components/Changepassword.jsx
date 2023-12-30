@@ -19,7 +19,7 @@ export default function Changepassword() {
         };
         // console.log(data);
         context.startLoader();
-        const url = "http://localhost:5000/api/user/requestOTP";
+        const url = "/api/user/requestOTP";
         var resp = await fetch(url, {
             method: "POST",
             headers: {
@@ -65,7 +65,7 @@ export default function Changepassword() {
 
         // console.log(data);
         context.startLoader();
-        const url = "http://localhost:5000/api/user/updatePassword";
+        const url = "/api/user/updatePassword";
         var resp = await fetch(url, {
             method: "PUT",
             headers: {

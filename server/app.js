@@ -11,18 +11,15 @@ var cookieParser = require('cookie-parser');
 app.use(express.json());
 app.use(cookieParser());  
 
-var dburi = `mongodb://mongo:27017/tally400`;
-console.log(dburi)
+var dburi = process.env.MONGO_DB;
 mongoose.connect(dburi, (err)=>{
     if(err) console.log(err);
     else console.log("Database connected");
 })
 
-app.use(express.static(path.join(__dirname, 'build')));
+console.log(process.env.MONGO_DB)
+app.use(express.static(path.join(__dirname, './../build')));
 
-app.get('/', function (req, res) {
-    res.send("<H1>Hello I am server</H1>");
-});
 app.use("/api/user", require("./routes/User"));
 app.use("/api/forms", require("./routes/Forms"));
 

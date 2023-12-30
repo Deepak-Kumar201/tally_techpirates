@@ -55,7 +55,7 @@ export default function Form() {
     useEffect(()=>{
         const getForm = async ()=>{
             const uri = new URL(window.location.href);
-            const url = "http://localhost:5000/api/forms/getauthform";
+            const url = "/api/forms/getauthform";
             context.startLoader();
             var data = {
                 fId : uri.searchParams.get("id"),

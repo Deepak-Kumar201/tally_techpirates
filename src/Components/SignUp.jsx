@@ -18,7 +18,7 @@ export default function SignUp() {
     const history = useHistory();
     const SubmitData = async(e) => {
         e.preventDefault();
-        const url = "http://localhost:5000/api/user/signup";
+        const url = "/api/user/signup";
         let Name = document.getElementById("NAME").value;
         let Email = document.getElementById("EMAIL").value.trim();
         let Pass = document.getElementById("PASS").value;
@@ -96,7 +96,7 @@ export default function SignUp() {
                 "email" : user.email,
                 "password": user.uid
             }
-            const url = "http://localhost:5000/api/user/signup";
+            const url = "/api/user/signup";
             var resp = await fetch(url, {
                 method: 'POST',
                 headers: {

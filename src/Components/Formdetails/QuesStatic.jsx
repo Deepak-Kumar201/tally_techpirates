@@ -11,7 +11,7 @@ export default function QuesStatic({formQue}) {
     useEffect(()=>{
         const getForm = async ()=>{
             const uri = new URL(window.location.href);
-            const url = "http://localhost:5000/api/forms/getanswer";
+            const url = "/api/forms/getanswer";
             context.startLoader();
             var data = {
                 fId : uri.searchParams.get("id"),

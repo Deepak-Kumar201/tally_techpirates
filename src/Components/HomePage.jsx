@@ -43,7 +43,7 @@ export default function HomePage(props) {
     }
     context.startLoader();
     // console.log(data);
-    var uri = "http://localhost:5000/api/user/signin";
+    var uri = "/api/user/signin";
     var resp = await fetch(uri, {
       method: "POST",
       headers: {
@@ -143,7 +143,7 @@ export default function HomePage(props) {
           email: user.email,
           password: user.uid,
         };
-        var uri = "http://localhost:5000/api/user/signin";
+        var uri = "/api/user/signin";
         var resp = await fetch(uri, {
           method: "POST",
           headers: {

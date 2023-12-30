@@ -11,7 +11,7 @@ export default function ScoreCard() {
     useEffect(()=>{
         const getForm = async ()=>{
             const uri = new URL(window.location.href);
-            const url = "http://localhost:5000/api/forms/getresponse";
+            const url = "/api/forms/getresponse";
             context.startLoader();
             var data = {
                 fId : uri.searchParams.get("id"),

@@ -36,7 +36,7 @@ const BaseState = (props) => {
     }
 
     const authUser =async ()=>{
-        const uri = "http://localhost:5000/api/user/auth";
+        const uri = "/api/user/auth";
         const data = {
             "token": localStorage.getItem('token')
         }
@@ -372,7 +372,7 @@ const BaseState = (props) => {
         // console.log(data);
         // return;
         
-        const url = "http://localhost:5000/api/forms/create";
+        const url = "/api/forms/create";
         startLoader();
 
         var resp = await fetch(url, {
